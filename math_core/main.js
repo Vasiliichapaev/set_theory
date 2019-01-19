@@ -19,7 +19,7 @@ f = implication(w, w)
 
 g = T.copy(f)
 
-console.log(f)
-console.log(g)
+// console.log(f)
+console.log(g.disjunction_args)
 
 T.close()

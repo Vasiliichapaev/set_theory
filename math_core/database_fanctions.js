@@ -204,3 +204,9 @@ exports.get_use_letters = sc => {
     const result = db.prepare(command).get();
     return set(result["use_letters"])
 };
+
+exports.get_args = sc => {
+    const db = sc.theory.db;
+    const command = `SELECT * FROM ${sc.name} WHERE id = ${sc.id}`;
+    return db.prepare(command).get();
+};

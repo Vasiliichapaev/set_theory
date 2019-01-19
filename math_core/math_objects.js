@@ -1,15 +1,16 @@
 const set = require("../libs/extended_set").set;
-const database_fanction = require("./database_fanction");
-const create_tables = database_fanction.create_tables;
-const get_spec_id = database_fanction.get_spec_id;
-const get_disjunction_id = database_fanction.get_disjunction_id;
-const get_negation_id = database_fanction.get_negation_id;
-const get_tau_id = database_fanction.get_tau_id;
-const get_verity = database_fanction.get_verity;
-const set_axiom = database_fanction.set_axiom;
-const set_proof = database_fanction.set_proof;
-const get_proof = database_fanction.get_proof;
-const get_use_letters = database_fanction.get_use_letters;
+const database_fanctions = require("./database_fanctions");
+const create_tables = database_fanctions.create_tables;
+const get_spec_id = database_fanctions.get_spec_id;
+const get_disjunction_id = database_fanctions.get_disjunction_id;
+const get_negation_id = database_fanctions.get_negation_id;
+const get_tau_id = database_fanctions.get_tau_id;
+const get_verity = database_fanctions.get_verity;
+const set_axiom = database_fanctions.set_axiom;
+const set_proof = database_fanctions.set_proof;
+const get_proof = database_fanctions.get_proof;
+const get_use_letters = database_fanctions.get_use_letters;
+const get_args = database_fanctions.get_args;
 
 // ===================== Математические объекты =====================
 class SignCombination{
@@ -103,10 +104,18 @@ class Tau extends Term{
 
   get tau_ratio(){
     if (this._tau_ratio) return this._tau_ratio;
+    const args = get_args(this);
+    this._tau_ratio = this.theory.create(args["ratio_name"], args["ratio_id"]);
+    this._tau_letter = this.theory.create("letter", args["letter_id"]);
+    return this._tau_ratio;
   }
 
   get tau_letter(){
     if (this._tau_letter) return this._tau_letter;
+    const args = get_args(this);
+    this._tau_ratio = this.theory.create(args["ratio_name"], args["ratio_id"]);
+    this._tau_letter = this.theory.create(args["letter_id"]);
+    return this._tau_letter;
   }
 
 };
@@ -128,6 +137,9 @@ class Negation extends Ratio{
 
   get negation_ratio(){
     if (this._negation_ratio) return this._negation_ratio;
+    const args = get_args(this);
+    this._negation_ratio = this.theory.create(args["ratio_name"], args["ratio_id"]);
+    return this._negation_ratio;
   }
 
 };
@@ -149,6 +161,9 @@ class Disjunction extends Ratio{
 
   get disjunction_args(){
     if (this._disjunction_args) return this._disjunction_args;
+    const args = get_args(this);
+    this._disjunction_args = [this.theory.create(args["ratio0_name"], args["ratio0_id"]), this.theory.create(args["ratio1_name"], args["ratio1_id"])];
+    return this._disjunction_args;
   }
 
 
@@ -157,11 +172,11 @@ class Disjunction extends Ratio{
 class Relation extends Ratio{
   constructor(name, args, theory, id){
     super();
+    this.name = name;
     if (id){
       this.id = id;
       this.theory = theory;
     }else{
-      this.name = name;
       this._specialsign_args = args;
       this.theory = args[0].theory;
       this._use_letters = args[0].use_letters.union(args[1].use_letters);
@@ -171,6 +186,9 @@ class Relation extends Ratio{
 
   get specialsign_args(){
     if (this._specialsign_args) return this._specialsign_args;
+    const args = get_args(this);
+    this._specialsign_args = [this.theory.create(args["term0_name"], args["term0_id"]), this.theory.create(args["term1_name"], args["term1_id"])];
+    return this._specialsign_args;
   }
 
 };
@@ -192,6 +210,9 @@ class Substantive extends Term{
 
   get specialsign_args(){
     if (this._specialsign_args) return this._specialsign_args;
+    const args = get_args(this);
+    this._specialsign_args = [this.theory.create(args["term0_name"], args["term0_id"]), this.theory.create(args["term1_name"], args["term1_id"])];
+    return this._specialsign_args;
   }
 
 };
