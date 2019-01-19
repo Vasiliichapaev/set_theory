@@ -5,6 +5,9 @@ const disjunction = math_objects.disjunction;
 const negation = math_objects.negation;
 const tau = math_objects.tau;
 
+const abbreviations = require("./abbreviations");
+const implication = abbreviations.implication;
+
 
 
 
@@ -21,7 +24,9 @@ d = disjunction(w, w)
 
 n = negation(d)
 
-t = tau(n, w)
+g = implication(d, n)
+
+t = tau(g, w)
 
 console.log(t)
 

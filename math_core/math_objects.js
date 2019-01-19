@@ -198,3 +198,5 @@ exports.pair = (a, b) => {
 exports.equal = (a, b) => {
   return new Relation('equal', [a, b]);
 };
+
+
