@@ -1,4 +1,4 @@
-let sqlite3 = require('sqlite3').verbose();
+let lite = require('better-sqlite3');
 
 exports.create_tables = () =>{
     const PATH = __dirname +'/database/database.sqlite3'
@@ -81,36 +81,26 @@ exports.create_tables = () =>{
             UNIQUE (ratio_name, ratio_id)
         );
         `
-    db = new sqlite3.Database(PATH);
-    db.serialize(() => {
-        db.exec('BEGIN');
-        db.exec(command);
-        db.exec('COMMIT');
-        db.exec('BEGIN');
-    });
+    db = lite(PATH);
+    db.exec('BEGIN');
+    db.exec(command);
+    db.exec('COMMIT');
+    db.exec('BEGIN');
     return db;
 };
 
 
 exports.get_spec_id = sc => {
+    const db = sc.theory.db;
     const use_letters = sc.use_letters.join(' ');
     const com1 = `INSERT OR IGNORE INTO ${sc.name} 
                     (term0_name, term0_id, term1_name, term1_id ,use_letters) 
                     VALUES ('${sc.args[0].name}', ${sc.args[0].id}, '${sc.args[1].name}', ${sc.args[1].id}, '${use_letters}')
                 `
-    const com2 = `SELECT * FROM ${sc.name} 
+    const com2 = `SELECT id FROM ${sc.name} 
                     WHERE term0_name = '${sc.args[0].name}' AND term0_id = ${sc.args[0].id} AND 
                     term1_name = '${sc.args[1].name}' AND term1_id = ${sc.args[1].id}
                 `
-    const db = sc.theory.db;
-    db.serialize(() => {
-        db.exec(com1);
-          });
-    let a = 0;
-    db.serialize(() => {
-        db.get(com2, [], (err, row) => {
-            sc.id = row.id;
-          });
-    });  
+    db.exec(com1);
+    return db.prepare(com2).get().id
 };
-

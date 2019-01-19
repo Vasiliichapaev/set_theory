@@ -114,7 +114,7 @@ class Relation extends Ratio{
     this.args = args;
     this.theory = args[0].theory
     this.use_letters = args[0].use_letters.union(args[1].use_letters);
-    get_spec_id(this);
+    this.id = get_spec_id(this);
   }
 
 };
@@ -150,9 +150,7 @@ class MathTheory{
   }
 
   close(){
-    this.db.serialize(() => {
-      db.exec('COMMIT');
-    });
+    this.db.exec('COMMIT');
     this.db.close();
   }
 
