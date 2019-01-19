@@ -1,6 +1,9 @@
-const create_tables = require("./database_fanction").create_tables;
-const get_spec_id = require("./database_fanction").get_spec_id;
-
+const database_fanction = require("./database_fanction")
+const create_tables = database_fanction.create_tables;
+const get_spec_id = database_fanction.get_spec_id;
+const get_disjunction_id = database_fanction.get_disjunction_id;
+const get_negation_id = database_fanction.get_negation_id;
+const get_tau_id = database_fanction.get_tau_id;
 
 // ========== Доработка стандартных множеств ========================
 
@@ -45,10 +48,8 @@ set = (arg) => {
   throw new Error("arg must be Set or Array or nothing");
 };
 
-// ==================================================================
 
-
-
+// ===================== Математические объекты =====================
 class SignCombination{
 
   eq(other){
@@ -88,6 +89,10 @@ class Tau extends Term{
     this.name = "tau"
     this.tau_ratio = ratio;
     this.tau_letter = letter;
+    this.theory = ratio.theory;
+    this.use_letters = set(ratio.use_letters);
+    this.use_letters.delete(letter.id);
+    this.id = get_tau_id(this);
   }
 };
 
@@ -96,14 +101,20 @@ class Negation extends Ratio{
     super();
     this.name = "negation";
     this.negation_ratio = ratio;
+    this.theory = ratio.theory;
+    this.use_letters = set(ratio.use_letters);
+    this.id = get_negation_id(this);
   }
 };
 
 class Disjunction extends Ratio{
-  constructor(...args){
+  constructor(args){
     super();
     this.name = "disjunction";
     this.disjunction_args = args;
+    this.theory = args[0].theory;
+    this.use_letters = args[0].use_letters.union(args[1].use_letters);
+    this.id = get_disjunction_id(this);
   }
 };
 
@@ -112,7 +123,7 @@ class Relation extends Ratio{
     super();
     this.name = name;
     this.args = args;
-    this.theory = args[0].theory
+    this.theory = args[0].theory;
     this.use_letters = args[0].use_letters.union(args[1].use_letters);
     this.id = get_spec_id(this);
   }
@@ -124,7 +135,9 @@ class Substantive extends Term{
     super();
     this.name = name;
     this.args = args;
-    get_spec_id(this);
+    this.theory = args[0].theory
+    this.use_letters = args[0].use_letters.union(args[1].use_letters);
+    this.id = get_spec_id(this);
   }
 };
 
@@ -156,15 +169,32 @@ class MathTheory{
 
 };
 
+// ============= функции создания математических объектов ===========
 
+exports.theory = () => {
+  return new MathTheory();
+};
 
-let T = new MathTheory();
+exports.tau = (ratio, letter) => {
+  return new Tau(ratio, letter);
+};
 
-a = T.letter()
-b = T.letter(a)
+exports.negation = (a) => {
+  return new Negation(a);
+};
 
-w = new Relation('belong', [a, b])
+exports.disjunction = (a, b) => {
+  return new Disjunction([a, b]);
+};
 
-console.log(w.id)
+exports.belong = (a, b) => {
+  return new Relation('belong', [a, b]);
+};
 
-T.close()
+exports.pair = (a, b) => {
+  return new Substantive('pair', [a, b]);
+};
+
+exports.equal = (a, b) => {
+  return new Relation('equal', [a, b]);
+};

@@ -102,5 +102,48 @@ exports.get_spec_id = sc => {
                     term1_name = '${sc.args[1].name}' AND term1_id = ${sc.args[1].id}
                 `
     db.exec(com1);
-    return db.prepare(com2).get().id
+    return db.prepare(com2).get().id;
+};
+
+exports.get_disjunction_id = sc => {
+    const db = sc.theory.db;
+    const use_letters = sc.use_letters.join(' ');
+    const com1 = `INSERT OR IGNORE INTO disjunction
+                    (ratio0_name, ratio0_id, ratio1_name, ratio1_id, use_letters)
+                    VALUES ('${sc.disjunction_args[0].name}', ${sc.disjunction_args[0].id}, '${sc.disjunction_args[1].name}', ${sc.disjunction_args[1].id}, '${use_letters}')
+                `
+    const com2 = `SELECT id FROM disjunction 
+                    WHERE ratio0_name = '${sc.disjunction_args[0].name}' AND ratio0_id = ${sc.disjunction_args[0].id} AND 
+                    ratio1_name = '${sc.disjunction_args[1].name}' AND ratio1_id = ${sc.disjunction_args[1].id}
+                `
+    db.exec(com1);
+    return db.prepare(com2).get().id;
+};
+
+exports.get_negation_id = sc => {
+    const db = sc.theory.db;
+    const use_letters = sc.use_letters.join(' ');
+    const com1 = `INSERT OR IGNORE INTO negation
+                    (ratio_name, ratio_id, use_letters)
+                    VALUES ('${sc.negation_ratio.name}', ${sc.negation_ratio.id}, '${use_letters}')
+                `
+    const com2 = `SELECT id FROM negation 
+                    WHERE ratio_name = '${sc.negation_ratio.name}' AND ratio_id = ${sc.negation_ratio.id}
+                `
+    db.exec(com1);
+    return db.prepare(com2).get().id;
+};
+
+exports.get_tau_id = sc => {
+    const db = sc.theory.db;
+    const use_letters = sc.use_letters.join(' ');
+    const com1 = `INSERT OR IGNORE INTO tau
+                    (ratio_name, ratio_id, letter_id, use_letters)
+                    VALUES ('${sc.tau_ratio.name}', ${sc.tau_ratio.id} , ${sc.tau_letter.id}, '${use_letters}')
+                `
+    const com2 = `SELECT id FROM tau 
+                    WHERE ratio_name = '${sc.tau_ratio.name}' AND ratio_id = ${sc.tau_ratio.id} AND letter_id = ${sc.tau_letter.id}
+                `
+    db.exec(com1);
+    return db.prepare(com2).get().id;
 };
