@@ -18,16 +18,14 @@ a = T.letter()
 b = T.letter(a)
 
 w = belong(a, b)
+e = belong(b, b)
+q = belong(a, a)
 
 
-d = disjunction(w, w)
 
-n = negation(d)
+// w.proof = [q, e, w]
 
-g = implication(d, n)
 
-t = tau(g, w)
-
-console.log(t)
+console.log(w.proof)
 
 T.close()

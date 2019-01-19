@@ -95,12 +95,12 @@ exports.get_spec_id = sc => {
     const use_letters = sc.use_letters.join(' ');
     const com1 = `INSERT OR IGNORE INTO ${sc.name} 
                     (term0_name, term0_id, term1_name, term1_id ,use_letters) 
-                    VALUES ('${sc.args[0].name}', ${sc.args[0].id}, '${sc.args[1].name}', ${sc.args[1].id}, '${use_letters}')
-                `
+                    VALUES ('${sc.specialsign_args[0].name}', ${sc.specialsign_args[0].id}, '${sc.specialsign_args[1].name}', ${sc.specialsign_args[1].id}, '${use_letters}')
+                `;
     const com2 = `SELECT id FROM ${sc.name} 
-                    WHERE term0_name = '${sc.args[0].name}' AND term0_id = ${sc.args[0].id} AND 
-                    term1_name = '${sc.args[1].name}' AND term1_id = ${sc.args[1].id}
-                `
+                    WHERE term0_name = '${sc.specialsign_args[0].name}' AND term0_id = ${sc.specialsign_args[0].id} AND 
+                    term1_name = '${sc.specialsign_args[1].name}' AND term1_id = ${sc.specialsign_args[1].id}
+                `;
     db.exec(com1);
     return db.prepare(com2).get().id;
 };
@@ -111,11 +111,11 @@ exports.get_disjunction_id = sc => {
     const com1 = `INSERT OR IGNORE INTO disjunction
                     (ratio0_name, ratio0_id, ratio1_name, ratio1_id, use_letters)
                     VALUES ('${sc.disjunction_args[0].name}', ${sc.disjunction_args[0].id}, '${sc.disjunction_args[1].name}', ${sc.disjunction_args[1].id}, '${use_letters}')
-                `
+                `;
     const com2 = `SELECT id FROM disjunction 
                     WHERE ratio0_name = '${sc.disjunction_args[0].name}' AND ratio0_id = ${sc.disjunction_args[0].id} AND 
                     ratio1_name = '${sc.disjunction_args[1].name}' AND ratio1_id = ${sc.disjunction_args[1].id}
-                `
+                `;
     db.exec(com1);
     return db.prepare(com2).get().id;
 };
@@ -126,10 +126,10 @@ exports.get_negation_id = sc => {
     const com1 = `INSERT OR IGNORE INTO negation
                     (ratio_name, ratio_id, use_letters)
                     VALUES ('${sc.negation_ratio.name}', ${sc.negation_ratio.id}, '${use_letters}')
-                `
+                `;
     const com2 = `SELECT id FROM negation 
                     WHERE ratio_name = '${sc.negation_ratio.name}' AND ratio_id = ${sc.negation_ratio.id}
-                `
+                `;
     db.exec(com1);
     return db.prepare(com2).get().id;
 };
@@ -140,10 +140,59 @@ exports.get_tau_id = sc => {
     const com1 = `INSERT OR IGNORE INTO tau
                     (ratio_name, ratio_id, letter_id, use_letters)
                     VALUES ('${sc.tau_ratio.name}', ${sc.tau_ratio.id} , ${sc.tau_letter.id}, '${use_letters}')
-                `
+                `;
     const com2 = `SELECT id FROM tau 
                     WHERE ratio_name = '${sc.tau_ratio.name}' AND ratio_id = ${sc.tau_ratio.id} AND letter_id = ${sc.tau_letter.id}
-                `
+                `;
     db.exec(com1);
     return db.prepare(com2).get().id;
+};
+
+exports.get_verity = ratio => {
+    const db = ratio.theory.db;
+    const command = `SELECT * FROM theorem WHERE ratio_name = '${ratio.name}' AND ratio_id = ${ratio.id}`;
+    if (db.prepare(command).get()) return true;
+};
+
+
+exports.set_axiom = ratio => {
+    const db = ratio.theory.db;
+    const command = `INSERT OR REPLACE INTO theorem (
+                        ratio_name,
+                        ratio_id,
+                        ratio0_name,
+                        ratio0_id,
+                        ratio1_name,
+                        ratio1_id
+                    ) 
+                    VALUES ('${ratio.name}', ${ratio.id}, Null, Null, Null, Null)`;
+    db.exec(command);
+};
+
+exports.set_proof = ratio => {
+    const db = ratio.theory.db;
+    const args = ratio._proof;
+    const command = `INSERT OR REPLACE INTO theorem (
+                    ratio_name,
+                    ratio_id,
+                    ratio0_name,
+                    ratio0_id,
+                    ratio1_name,
+                    ratio1_id
+                ) 
+                VALUES ('${args[2].name}', ${args[2].id}, '${args[0].name}', ${args[0].id}, '${args[1].name}', ${args[1].id})
+    `;
+    db.exec(command);
+};
+
+exports.get_proof = ratio => {
+    const theory = ratio.theory;
+    const db = ratio.theory.db;
+    const command = `SELECT * FROM theorem WHERE ratio_name = '${ratio.name}' AND ratio_id = ${ratio.id}`;
+    const result = db.prepare(command).get();
+    let proof = [];
+    if (result){
+        if (result['ratio0_name'] === null) return [ratio]
+        return [theory.create(result['ratio0_name'], result['ratio0_id']), theory.create(result['ratio1_name'], result['ratio1_id']), ratio];
+    };
 };

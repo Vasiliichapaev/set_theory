@@ -4,6 +4,10 @@ const get_spec_id = database_fanction.get_spec_id;
 const get_disjunction_id = database_fanction.get_disjunction_id;
 const get_negation_id = database_fanction.get_negation_id;
 const get_tau_id = database_fanction.get_tau_id;
+const get_verity = database_fanction.get_verity;
+const set_axiom = database_fanction.set_axiom;
+const set_proof = database_fanction.set_proof;
+const get_proof = database_fanction.get_proof;
 
 // ========== Доработка стандартных множеств ========================
 
@@ -64,6 +68,33 @@ class Term extends SignCombination{
 };
 
 class Ratio extends SignCombination{
+  constructor() {
+    super();
+    this._verity = undefined;
+    this._proof = undefined;
+  }
+
+  get verity(){
+    if (this._verity !== undefined) return this._verity;
+    return get_verity(this);
+  }
+
+  axiom(){
+    this._verity = true;
+    set_axiom(this)
+  };
+
+  set proof(ratios){
+    this._proof = ratios;
+    this._verity = true;
+    set_proof(this);
+  }
+
+  get proof(){
+    if (this._proof !== undefined) return this._proof;
+    this._proof = get_proof(this);
+    return this._proof;
+  }
 
 };
 
@@ -87,45 +118,69 @@ class Tau extends Term{
   constructor(ratio, letter){
     super();
     this.name = "tau"
-    this.tau_ratio = ratio;
-    this.tau_letter = letter;
+    this._tau_ratio = ratio;
+    this._tau_letter = letter;
     this.theory = ratio.theory;
     this.use_letters = set(ratio.use_letters);
     this.use_letters.delete(letter.id);
     this.id = get_tau_id(this);
   }
+
+  get tau_ratio(){
+    if (this._tau_ratio) return this._tau_ratio;
+  }
+
+  get tau_letter(){
+    if (this._tau_letter) return this._tau_letter;
+  }
+
 };
 
 class Negation extends Ratio{
   constructor(ratio){
     super();
     this.name = "negation";
-    this.negation_ratio = ratio;
+    this._negation_ratio = ratio;
     this.theory = ratio.theory;
     this.use_letters = set(ratio.use_letters);
     this.id = get_negation_id(this);
   }
+
+  get negation_ratio(){
+    if (this._negation_ratio) return this._negation_ratio;
+  }
+
 };
 
 class Disjunction extends Ratio{
   constructor(args){
     super();
     this.name = "disjunction";
-    this.disjunction_args = args;
+    this._disjunction_args = args;
     this.theory = args[0].theory;
     this.use_letters = args[0].use_letters.union(args[1].use_letters);
     this.id = get_disjunction_id(this);
   }
+
+  get disjunction_args(){
+    if (this._disjunction_args) return this._disjunction_args;
+  }
+
+
 };
 
 class Relation extends Ratio{
   constructor(name, args){
     super();
     this.name = name;
-    this.args = args;
+    this._specialsign_args = args;
     this.theory = args[0].theory;
     this.use_letters = args[0].use_letters.union(args[1].use_letters);
     this.id = get_spec_id(this);
+  }
+
+  get specialsign_args(){
+    if (this._specialsign_args) return this._specialsign_args;
   }
 
 };
@@ -134,11 +189,16 @@ class Substantive extends Term{
   constructor(name, args){
     super();
     this.name = name;
-    this.args = args;
+    this._specialsign_args = args;
     this.theory = args[0].theory
     this.use_letters = args[0].use_letters.union(args[1].use_letters);
     this.id = get_spec_id(this);
   }
+
+  get specialsign_args(){
+    if (this._specialsign_args) return this._specialsign_args;
+  }
+
 };
 
 class MathTheory{
@@ -160,6 +220,10 @@ class MathTheory{
       letter_id++;
     };
     return new Letter(this, letter_id);
+  }
+
+  create(name, id){
+    return [name, id]
   }
 
   close(){
