@@ -1,4 +1,5 @@
-let lite = require('better-sqlite3');
+const lite = require('better-sqlite3');
+const set = require("../libs/extended_set").set;
 
 exports.create_tables = () =>{
     const PATH = __dirname +'/database/database.sqlite3'
@@ -195,4 +196,11 @@ exports.get_proof = ratio => {
         if (result['ratio0_name'] === null) return [ratio]
         return [theory.create(result['ratio0_name'], result['ratio0_id']), theory.create(result['ratio1_name'], result['ratio1_id']), ratio];
     };
+};
+
+exports.get_use_letters = sc => {
+    const db = sc.theory.db;
+    const command = `SELECT use_letters FROM ${sc.name} WHERE id = ${sc.id}`;
+    const result = db.prepare(command).get();
+    return set(result["use_letters"])
 };

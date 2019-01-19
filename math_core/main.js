@@ -4,12 +4,8 @@ const belong = math_objects.belong;
 const disjunction = math_objects.disjunction;
 const negation = math_objects.negation;
 const tau = math_objects.tau;
-
 const abbreviations = require("./abbreviations");
 const implication = abbreviations.implication;
-
-
-
 
 
 let T = theory()
@@ -18,14 +14,12 @@ a = T.letter()
 b = T.letter(a)
 
 w = belong(a, b)
-e = belong(b, b)
-q = belong(a, a)
 
+f = implication(w, w)
 
+g = T.copy(f)
 
-// w.proof = [q, e, w]
-
-
-console.log(w.proof)
+console.log(f)
+console.log(g)
 
 T.close()

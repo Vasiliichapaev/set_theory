@@ -1,4 +1,5 @@
-const database_fanction = require("./database_fanction")
+const set = require("../libs/extended_set").set;
+const database_fanction = require("./database_fanction");
 const create_tables = database_fanction.create_tables;
 const get_spec_id = database_fanction.get_spec_id;
 const get_disjunction_id = database_fanction.get_disjunction_id;
@@ -8,57 +9,26 @@ const get_verity = database_fanction.get_verity;
 const set_axiom = database_fanction.set_axiom;
 const set_proof = database_fanction.set_proof;
 const get_proof = database_fanction.get_proof;
-
-// ========== Доработка стандартных множеств ========================
-
-class ExtendedSet extends Set{
-
-  join(separator){
-    if (this.size === 0) return '';
-
-    let str = '';
-
-    this.forEach(element => {
-      str += String(element) + separator;
-    });
-    return str.substring(0, str.length - separator.length);
-  }
-
-  union(other_set){
-    let union_set = new ExtendedSet();
-
-    this.forEach(element => {
-      union_set.add(element)
-    });
-
-    other_set.forEach(element => {
-      union_set.add(element)
-    });
-
-    return union_set;
-  }
-};
-
-set = (arg) => {
-  if (arg === undefined) return new ExtendedSet();
-
-  if (arg instanceof Array || arg instanceof Set){
-    let new_set = new ExtendedSet();
-    arg.forEach(element => {
-      new_set.add(element);
-    });
-    return new_set;
-  };
-  throw new Error("arg must be Set or Array or nothing");
-};
-
+const get_use_letters = database_fanction.get_use_letters;
 
 // ===================== Математические объекты =====================
 class SignCombination{
+  constructor(){
+    this._use_letters = undefined;
+  }
 
   eq(other){
     // Сравнение знакосочетаний
     return this.name === other.name && this.id === other.id;
+  }
+
+  get use_letters(){
+    if (this._use_letters !== undefined) return this._use_letters;
+    return get_use_letters(this);
+  }
+
+  toString(){
+    return this.name + " " + this.id
   }
 
 };
@@ -104,7 +74,7 @@ class Letter extends Term{
     this.theory = theory;
     this.id = letter_id;
     this.name = "letter";
-    this.use_letters = (() => {
+    this._use_letters = (() => {
       let use_letters = set();
       use_letters.add(this.id);
       return use_letters;
@@ -115,15 +85,20 @@ class Letter extends Term{
 };
 
 class Tau extends Term{
-  constructor(ratio, letter){
+  constructor(ratio, letter, theory, id){
     super();
     this.name = "tau"
-    this._tau_ratio = ratio;
-    this._tau_letter = letter;
-    this.theory = ratio.theory;
-    this.use_letters = set(ratio.use_letters);
-    this.use_letters.delete(letter.id);
-    this.id = get_tau_id(this);
+    if (id){
+      this.id = id;
+      this.theory = theory;
+    }else{
+      this._tau_ratio = ratio;
+      this._tau_letter = letter;
+      this.theory = ratio.theory;
+      this._use_letters = set(ratio.use_letters);
+      this._use_letters.delete(letter.id);
+      this.id = get_tau_id(this);
+    };
   }
 
   get tau_ratio(){
@@ -137,13 +112,18 @@ class Tau extends Term{
 };
 
 class Negation extends Ratio{
-  constructor(ratio){
+  constructor(ratio, theory, id){
     super();
     this.name = "negation";
-    this._negation_ratio = ratio;
-    this.theory = ratio.theory;
-    this.use_letters = set(ratio.use_letters);
-    this.id = get_negation_id(this);
+    if (id){
+      this.id = id;
+      this.theory = theory;
+    }else{
+      this._negation_ratio = ratio;
+      this.theory = ratio.theory;
+      this._use_letters = set(ratio.use_letters);
+      this.id = get_negation_id(this);
+    };
   }
 
   get negation_ratio(){
@@ -153,13 +133,18 @@ class Negation extends Ratio{
 };
 
 class Disjunction extends Ratio{
-  constructor(args){
+  constructor(args, theory, id){
     super();
     this.name = "disjunction";
-    this._disjunction_args = args;
-    this.theory = args[0].theory;
-    this.use_letters = args[0].use_letters.union(args[1].use_letters);
-    this.id = get_disjunction_id(this);
+    if (id){
+      this.id = id;
+      this.theory = theory;
+    }else{
+      this._disjunction_args = args;
+      this.theory = args[0].theory;
+      this._use_letters = args[0].use_letters.union(args[1].use_letters);
+      this.id = get_disjunction_id(this);
+    };
   }
 
   get disjunction_args(){
@@ -170,13 +155,18 @@ class Disjunction extends Ratio{
 };
 
 class Relation extends Ratio{
-  constructor(name, args){
+  constructor(name, args, theory, id){
     super();
-    this.name = name;
-    this._specialsign_args = args;
-    this.theory = args[0].theory;
-    this.use_letters = args[0].use_letters.union(args[1].use_letters);
-    this.id = get_spec_id(this);
+    if (id){
+      this.id = id;
+      this.theory = theory;
+    }else{
+      this.name = name;
+      this._specialsign_args = args;
+      this.theory = args[0].theory;
+      this._use_letters = args[0].use_letters.union(args[1].use_letters);
+      this.id = get_spec_id(this);
+    };
   }
 
   get specialsign_args(){
@@ -186,13 +176,18 @@ class Relation extends Ratio{
 };
 
 class Substantive extends Term{
-  constructor(name, args){
+  constructor(name, args, theory, id){
     super();
     this.name = name;
-    this._specialsign_args = args;
-    this.theory = args[0].theory
-    this.use_letters = args[0].use_letters.union(args[1].use_letters);
-    this.id = get_spec_id(this);
+    if (id){
+      this.id = id;
+      this.theory = theory;
+    }else{
+      this._specialsign_args = args;
+      this.theory = args[0].theory
+      this._use_letters = args[0].use_letters.union(args[1].use_letters);
+      this.id = get_spec_id(this);
+    };
   }
 
   get specialsign_args(){
@@ -223,7 +218,17 @@ class MathTheory{
   }
 
   create(name, id){
-    return [name, id]
+    if (name == 'letter') return new Letter(this, id);
+    if (name == 'tau') return new Tau(undefined, undefined, this, id);
+    if (name == 'negation') return new Negation(undefined, this, id)
+    if (name == 'disjunction') return new Disjunction(undefined, this, id)
+    if (name == 'belong') return new Relation("belong", undefined, this, id)
+    if (name == 'pair') return new Relation(name="pair", undefined, this, id)
+    if (name == 'equal') return new Substantive(name="equal", undefined, this, id)
+  }
+
+  copy(sc){
+    return this.create(sc.name, sc.id);
   }
 
   close(){
