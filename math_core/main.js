@@ -16,10 +16,11 @@ b = T.letter(a)
 w = belong(a, b)
 
 f = implication(w, w)
+f.axiom()
 
 g = T.copy(f)
 
 // console.log(f)
-console.log(g.disjunction_args)
+console.log(g.verity)
 
 T.close()

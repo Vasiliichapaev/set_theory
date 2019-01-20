@@ -47,7 +47,7 @@ class Ratio extends SignCombination{
 
   get verity(){
     if (this._verity !== undefined) return this._verity;
-    return get_verity(this);
+    return this.theory.get_verity(this);
   }
 
   axiom(){
@@ -58,12 +58,12 @@ class Ratio extends SignCombination{
   set proof(ratios){
     this._proof = ratios;
     this._verity = true;
-    set_proof(this);
+    this.theory.set_proof(this);
   }
 
   get proof(){
     if (this._proof !== undefined) return this._proof;
-    this._proof = get_proof(this);
+    this._proof = this.theory.get_proof(this);
     return this._proof;
   }
 
@@ -255,6 +255,18 @@ class MathTheory{
   close(){
     this.db.exec('COMMIT');
     this.db.close();
+  }
+
+  set_proof(ratio){
+    set_proof(ratio)
+  }
+
+  get_proof(ratio){
+    return get_proof(ratio)
+  }
+
+  get_verity(ratio){
+    return get_verity(ratio)
   }
 
 };
