@@ -32,6 +32,67 @@ class SignCombination{
     return this.name + " " + this.id
   }
 
+  replace(letters, terms){
+
+    if (letters instanceof SignCombination){
+      letters = [letters];
+      terms = [terms];
+    }else{
+      letters = letters.slice();
+      terms = terms.slice();
+    };
+
+    for (let i = letters.length - 1; i >= 0; i--){
+      if (letters[i].eq(terms[i]) || !this.use_letters.has(letters[i].id)){
+        letters.splice(i, 1);
+        terms.splice(i, 1);
+      };
+    };
+
+    if (letters.length === 0) return this;
+    
+    if (this instanceof Letter){
+      for (let i in letters){
+        if (this.eq(letters[i])){
+          return terms[i];
+        };
+      };
+    };
+
+
+    if (this instanceof Negation){
+      return new Negation(this.negation_ratio.replace(letters, terms));
+    };
+
+    if (this instanceof Disjunction){
+      return new Disjunction([this.disjunction_args[0].replace(letters, terms), this.disjunction_args[1].replace(letters, terms)]);
+    };
+
+    if (this instanceof Relation){
+      return new Relation(this.name, [this.specialsign_args[0].replace(letters, terms), this.specialsign_args[1].replace(letters, terms)]);
+    };
+
+    if (this instanceof Substantive){
+      return new Substantive(this.name, [this.specialsign_args[0].replace(letters, terms), this.specialsign_args[1].replace(letters, terms)]);
+    };
+
+    if (this instanceof Tau){
+      let terms_use_letters = set();
+      for (let i in letters){
+        terms_use_letters = terms_use_letters.union(terms[i].use_letters);
+      };
+
+      if (!terms_use_letters.has(this.tau_letter.id)){
+        return new Tau(this.tau_ratio.replace(letters ,terms), this.tau_letter);
+      };
+
+      let new_letter = this.theory.letter(this.tau_ratio, ...letters, ...terms);
+      let ratio = this.tau_ratio.replace(this.tau_letter, new_letter);
+      ratio = ratio.replace(letters, terms);
+      return new Tau(ratio, new_letter);
+    };
+  }
+
 };
 
 class Term extends SignCombination{
@@ -81,7 +142,7 @@ class Letter extends Term{
       return use_letters;
     })();
   }
-  
+ 
 
 };
 

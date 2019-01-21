@@ -15,12 +15,10 @@ b = T.letter(a)
 
 w = belong(a, b)
 
-f = implication(w, w)
-f.axiom()
+t = tau(w, a)
 
-g = T.copy(f)
+c = t.replace([a, b], [b, a])
 
-// console.log(f)
-console.log(g.verity)
+console.log(c)
 
 T.close()
