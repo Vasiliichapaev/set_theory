@@ -17,8 +17,7 @@ w = belong(a, b)
 
 t = tau(w, a)
 
-c = t.replace([a, b], [b, a])
 
-console.log(c)
+console.log(t.is_tau)
 
 T.close()

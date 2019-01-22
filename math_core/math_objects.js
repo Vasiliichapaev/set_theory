@@ -29,7 +29,39 @@ class SignCombination{
   }
 
   toString(){
-    return this.name + " " + this.id
+    return this.name + " " + this.id;
+  }
+
+  get is_letter(){
+    return this instanceof Letter;
+  }
+
+  get is_tau(){
+    return this instanceof Tau;
+  }
+
+  get is_negation(){
+    return this instanceof Negation;
+  }
+
+  get is_disjunction(){
+    return this instanceof Disjunction;
+  }
+
+  get is_special_sign(){
+    return this instanceof Relation || this instanceof Substantive;
+  }
+
+  get is_belong(){
+    return this instanceof Relation || this.name === "belong";
+  }
+
+  get is_pair(){
+    return this instanceof Substantive || this.name === "pair";
+  }
+
+  get is_equal(){
+    return this instanceof Relation || this.name === "equal";
   }
 
   replace(letters, terms){
@@ -305,8 +337,8 @@ class MathTheory{
     if (name == 'negation') return new Negation(undefined, this, id)
     if (name == 'disjunction') return new Disjunction(undefined, this, id)
     if (name == 'belong') return new Relation("belong", undefined, this, id)
-    if (name == 'pair') return new Relation(name="pair", undefined, this, id)
-    if (name == 'equal') return new Substantive(name="equal", undefined, this, id)
+    if (name == 'pair') return new Relation("pair", undefined, this, id)
+    if (name == 'equal') return new Substantive("equal", undefined, this, id)
   }
 
   copy(sc){
