@@ -32,6 +32,14 @@ class SignCombination{
     return this.name + " " + this.id;
   }
 
+  get is_term(){
+    return this instanceof Term;
+  }
+
+  get is_ratio(){
+    return this instanceof Ratio;
+  }
+
   get is_letter(){
     return this instanceof Letter;
   }
@@ -53,15 +61,15 @@ class SignCombination{
   }
 
   get is_belong(){
-    return this instanceof Relation || this.name === "belong";
+    return this instanceof Relation && this.name === "belong";
   }
 
   get is_pair(){
-    return this instanceof Substantive || this.name === "pair";
+    return this instanceof Substantive && this.name === "pair";
   }
 
   get is_equal(){
-    return this instanceof Relation || this.name === "equal";
+    return this instanceof Relation && this.name === "equal";
   }
 
   replace(letters, terms){

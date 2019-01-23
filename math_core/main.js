@@ -4,9 +4,10 @@ const belong = math_objects.belong;
 const disjunction = math_objects.disjunction;
 const negation = math_objects.negation;
 const tau = math_objects.tau;
-const abbreviations = require("./abbreviations");
-const implication = abbreviations.implication;
-
+const abbreviations_implication = require("./abbreviations/implication");
+const implication = abbreviations_implication.implication;
+const is_implication = abbreviations_implication.is_implication;
+const implication_args = abbreviations_implication.implication_args;
 
 let T = theory()
 
@@ -15,9 +16,9 @@ b = T.letter(a)
 
 w = belong(a, b)
 
-t = tau(w, a)
+g = implication(w, w)
 
 
-console.log(t.is_tau)
+console.log(implication_args(g))
 
 T.close()
