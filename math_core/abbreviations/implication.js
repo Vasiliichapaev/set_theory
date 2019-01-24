@@ -13,7 +13,7 @@ exports.is_implication = sc => {
 }
 
 exports.implication_args = sc => {
-  if (this.hasOwnProperty("_implication_args")) return this._implication_args;
-  this._implication_args = [this.disjunction_args[0].negation_ratio, this.disjunction_args[1]];
-  return this._implication_args;
+  if (sc.hasOwnProperty("_implication_args")) return sc._implication_args;
+  sc._implication_args = [sc.disjunction_args[0].negation_ratio, sc.disjunction_args[1]];
+  return sc._implication_args;
 }

@@ -60,6 +60,14 @@ class SignCombination{
     return this instanceof Relation || this instanceof Substantive;
   }
 
+  get is_relation(){
+    return this instanceof Relation;
+  }
+
+  get is_substantive(){
+    return this instanceof Substantive;
+  }
+
   get is_belong(){
     return this instanceof Relation && this.name === "belong";
   }
@@ -70,6 +78,10 @@ class SignCombination{
 
   get is_equal(){
     return this instanceof Relation && this.name === "equal";
+  }
+
+  use(letter){
+    return this.use_letters.has(letter.id);
   }
 
   replace(letters, terms){
@@ -83,7 +95,7 @@ class SignCombination{
     };
 
     for (let i = letters.length - 1; i >= 0; i--){
-      if (letters[i].eq(terms[i]) || !this.use_letters.has(letters[i].id)){
+      if (letters[i].eq(terms[i]) || !this.use(letters[i])){
         letters.splice(i, 1);
         terms.splice(i, 1);
       };
@@ -91,7 +103,7 @@ class SignCombination{
 
     if (letters.length === 0) return this;
     
-    if (this instanceof Letter){
+    if (this.is_letter){
       for (let i in letters){
         if (this.eq(letters[i])){
           return terms[i];
@@ -100,23 +112,23 @@ class SignCombination{
     };
 
 
-    if (this instanceof Negation){
+    if (this.is_negation){
       return new Negation(this.negation_ratio.replace(letters, terms));
     };
 
-    if (this instanceof Disjunction){
+    if (this.is_disjunction){
       return new Disjunction([this.disjunction_args[0].replace(letters, terms), this.disjunction_args[1].replace(letters, terms)]);
     };
 
-    if (this instanceof Relation){
+    if (this.is_relation){
       return new Relation(this.name, [this.specialsign_args[0].replace(letters, terms), this.specialsign_args[1].replace(letters, terms)]);
     };
 
-    if (this instanceof Substantive){
+    if (this.is_substantive){
       return new Substantive(this.name, [this.specialsign_args[0].replace(letters, terms), this.specialsign_args[1].replace(letters, terms)]);
     };
 
-    if (this instanceof Tau){
+    if (this.is_tau){
       let terms_use_letters = set();
       for (let i in letters){
         terms_use_letters = terms_use_letters.union(terms[i].use_letters);
