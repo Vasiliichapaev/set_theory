@@ -9,16 +9,22 @@ const implication = abbreviations_implication.implication;
 const is_implication = abbreviations_implication.is_implication;
 const implication_args = abbreviations_implication.implication_args;
 
+const C1 = require("./deductiv/C1").C1;
+
 let T = theory()
 
 a = T.letter()
 b = T.letter(a)
 
 w = belong(a, b)
+w.axiom()
+c = belong(b, a)
 
-g = implication(w, w)
+g = implication(w, c)
+g.axiom()
+console.log(c.verity)
+C1(w, c)
+console.log(c.proof)
 
-
-console.log(implication_args(g))
 
 T.close()
