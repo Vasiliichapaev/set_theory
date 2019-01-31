@@ -9,22 +9,28 @@ const implication = abbreviations_implication.implication;
 const is_implication = abbreviations_implication.is_implication;
 const implication_args = abbreviations_implication.implication_args;
 
-const C1 = require("./deductiv/C1").C1;
+const C6 = require("./deductiv/C6").C6;
 
 let T = theory()
 
 a = T.letter()
 b = T.letter(a)
 
-w = belong(a, b)
-w.axiom()
-c = belong(b, a)
+A = belong(a, b)
+B = belong(b, a)
+C = belong(a, a)
 
-g = implication(w, c)
-g.axiom()
-console.log(c.verity)
-C1(w, c)
-console.log(c.proof)
+q = implication(A, B)
+w = implication(B, C)
+e = implication(A, C)
+
+q.axiom()
+w.axiom()
+
+C6(A, B, C)
+
+
+console.log(e.verity)
 
 
 T.close()
