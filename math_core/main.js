@@ -19,7 +19,7 @@ A = belong(a, b)
 B = belong(b, a)
 C = belong(a, a)
 
-w = C11(A)
+w = C12(A, B)
 
 
 
