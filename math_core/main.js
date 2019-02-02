@@ -4,10 +4,9 @@ const belong = math_objects.belong;
 const disjunction = math_objects.disjunction;
 const negation = math_objects.negation;
 const tau = math_objects.tau;
-const abbreviations_implication = require("./abbreviations/implication");
-const implication = abbreviations_implication.implication;
-const is_implication = abbreviations_implication.is_implication;
-const implication_args = abbreviations_implication.implication_args;
+const implication = require("./abbreviations/implication");
+const is_implication = implication.is_implication;
+const implication_args = implication.implication_args;
 
 const C6 = require("./deductiv/C6");
 
@@ -30,7 +29,7 @@ w.axiom()
 C6(A, B, C)
 
 
-console.log(e.proof)
+console.log(implication)
 
 
 T.close()

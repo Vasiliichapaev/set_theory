@@ -3,11 +3,12 @@ const disjunction = math_objects.disjunction;
 const negation = math_objects.negation;
 
 
-exports.implication = (a, b) => {
+exports = module.exports = (a, b) => {
     this._implication_args = [a, b];
     return disjunction(negation(a), b);
   };
 
+  
 exports.is_implication = sc => {
   return sc.is_disjunction && sc.disjunction_args[0].is_negation;
 }
