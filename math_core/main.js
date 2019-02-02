@@ -24,7 +24,7 @@ w = C12(A, B)
 
 
 
-console.log(w.verity)
+console.log(w.proof)
 
 
 T.close()
