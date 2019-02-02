@@ -9,7 +9,7 @@ const implication = abbreviations_implication.implication;
 const is_implication = abbreviations_implication.is_implication;
 const implication_args = abbreviations_implication.implication_args;
 
-const C6 = require("./deductiv/C6").C6;
+const C6 = require("./deductiv/C6");
 
 let T = theory()
 
@@ -30,7 +30,7 @@ w.axiom()
 C6(A, B, C)
 
 
-console.log(e.verity)
+console.log(e.proof)
 
 
 T.close()

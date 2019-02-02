@@ -1,7 +1,7 @@
 const implication = require("../abbreviations/implication").implication;
 
 
-exports.C1 = (A, B) => {
+module.exports = (A, B) => {
     if (A.is_ratio && B.is_ratio){
         if (!B.verity){
             let C = implication(A, B);
