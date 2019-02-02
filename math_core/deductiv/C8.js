@@ -10,11 +10,12 @@ const C6 = require("./C6");
 
 exports = module.exports = (A) => {
     if (A.is_ratio){
-        let sc = implication(A, A); 
-        if (!sc.verity){
+        const ratio = implication(A, A); 
+        if (!ratio.verity){
             S2(A, A);
             S1(A);
             C6(A, disjunction(A, A), A);
         }; 
+        return ratio;
     };
 };

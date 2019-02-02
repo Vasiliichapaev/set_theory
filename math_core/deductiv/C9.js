@@ -9,10 +9,11 @@ const C7 = require("./C7");
 
 exports = module.exports = (A, B) => {
     if (A.is_ratio && B.is_ratio && B.verity){
-        let sc = implication(A, B); 
-        if (!sc.verity){
+        const ratio = implication(A, B); 
+        if (!ratio.verity){
             C7(negation(A), B);
-            C1(B, sc);
+            C1(B, ratio);
         }; 
+        return ratio;
     };
 };

@@ -11,11 +11,12 @@ const C8 = require("./C8");
 
 exports = module.exports = (A) => {
     if (A.is_ratio){
-        let sc = disjunction(A, negation(A)); 
-        if (!sc.verity){
+        const ratio = disjunction(A, negation(A)); 
+        if (!ratio.verity){
             C8(A);
-            sc = S3(negation(A), A);
+            let sc = S3(negation(A), A);
             C1(...implication_args(sc));
         }; 
+        return ratio;
     };
 };

@@ -19,9 +19,9 @@ A = belong(a, b)
 B = belong(b, a)
 C = belong(a, a)
 
-w = implication(A, negation(negation(A)))
+w = C11(A)
 
-C11(A)
+
 
 
 console.log(w.verity)

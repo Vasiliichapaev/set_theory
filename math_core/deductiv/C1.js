@@ -9,5 +9,6 @@ exports = module.exports = (A, B) => {
                 B.proof = [A, C, B];
             };
         };  
+        return B;
     };
 };
