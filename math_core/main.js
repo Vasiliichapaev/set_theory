@@ -8,7 +8,7 @@ const implication = require("./abbreviations/implication");
 const is_implication = implication.is_implication;
 const implication_args = implication.implication_args;
 
-const C7 = require("./deductiv/C7");
+const C9 = require("./deductiv/C9");
 
 let T = theory()
 
@@ -19,9 +19,11 @@ A = belong(a, b)
 B = belong(b, a)
 C = belong(a, a)
 
-w = implication(B, disjunction(A, B))
+B.axiom()
 
-C7(A, B)
+w = implication(A, B)
+
+C9(A, B)
 
 
 console.log(w.verity)
