@@ -1,4 +1,4 @@
-const implication = require("../abbreviations/implication").implication;
+const implication = require("../abbreviations/implication");
 const disjunction = require("../math_objects").disjunction;
 
 
