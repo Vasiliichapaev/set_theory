@@ -8,12 +8,12 @@ const C1 = require("./C1");
 const C6 = require("./C6");
 const C11 = require("./C11");
 
-// Пусть A, B - два соотношения. Соотношение
-// (A влечёт B) влечёт ((не B) влечёт (не A))
+// Пусть A, B - два соотношения. 
+// Соотношение (A влечёт B) влечёт ((не B) влечёт (не A))
 // есть теорема.
 
-exports = module.exports = (A) => {
-    if (A.is_ratio){
+exports = module.exports = (A, B) => {
+    if (A.is_ratio, B.is_ratio){
         let imp_A_B = implication(A, B);
         let imp_neB_neA = implication(negation(B), negation(A));
         let neneB = negation(negation(B));
