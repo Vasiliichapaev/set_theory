@@ -8,7 +8,7 @@ const implication = require("./abbreviations/implication");
 const is_implication = implication.is_implication;
 const implication_args = implication.implication_args;
 
-const C11 = require("./deductiv/C11");
+const C12 = require("./deductiv/C12");
 
 let T = theory()
 
