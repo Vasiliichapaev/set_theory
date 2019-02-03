@@ -331,8 +331,10 @@ class Substantive extends Term{
 };
 
 class MathTheory{
-  constructor(){
-    this.db = create_tables();
+  constructor(real=true){
+    if (real){
+      this.db = create_tables();
+    };
   }
 
   letter(...args){
@@ -414,4 +416,4 @@ exports.equal = (a, b) => {
   return new Relation('equal', [a, b]);
 };
 
-
+exports.MathTheory = MathTheory;
