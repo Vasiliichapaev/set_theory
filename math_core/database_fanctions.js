@@ -210,3 +210,22 @@ exports.get_args = sc => {
     const command = `SELECT * FROM ${sc.name} WHERE id = ${sc.id}`;
     return db.prepare(command).get();
 };
+
+exports.get_quant = (sc, letter, term) => {
+    const db = sc.theory.db;
+    const command = `SELECT new_sc_id FROM quant_exist 
+                    WHERE sc_name = '${sc.name}' AND sc_id = ${sc.id} AND letter_id = ${letter.id} 
+                    AND term_name = '${term.name}' AND term_id = ${term.id}`;
+    const result = db.prepare(command).get();
+    if (result){
+        return sc.theory.create(sc.name, result.new_sc_id);
+    }
+};
+
+exports.set_quant = (sc, letter, term, new_sc) => {
+    const db = sc.theory.db;
+    const command = `INSERT INTO quant_exist 
+                    (sc_name, sc_id, letter_id, term_name, term_id, new_sc_id) 
+                    VALUES('${sc.name}', ${sc.id}, ${letter.id}, '${term.name}', ${term.id}, ${new_sc.id})`;
+    db.exec(command);
+};

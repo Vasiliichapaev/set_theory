@@ -81,7 +81,7 @@ class AuxiliaryTheory extends MathTheory {
 
     proofer(B){
         let Bi = this.pro_theory.copy(B);
-        let AimpBi = implication(this.A, Bi)
+        let AimpBi = implication(this.A, Bi);
         if (!AimpBi.verity){
             if (Bi.eq(this.A)){
                 C8(Bi);
@@ -109,7 +109,7 @@ class AuxiliaryTheory extends MathTheory {
     }
 
     close(){
-        if (this.new_B.verity){
+        if (this.new_B.verity && !this.ratio.verity){
             this.proofer(this.new_B);
         };
       }
