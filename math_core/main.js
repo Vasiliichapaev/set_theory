@@ -5,7 +5,7 @@ const disjunction = math_objects.disjunction;
 const negation = math_objects.negation;
 const tau = math_objects.tau;
 const implication = require("./abbreviations/implication");
-const quant_exist = require("./abbreviations/quant_exist");
+const quant_all = require("./abbreviations/quant_all");
 const is_implication = implication.is_implication;
 const implication_args = implication.implication_args;
 
@@ -21,7 +21,7 @@ A = belong(a, b)
 B = belong(b, a)
 e = implication(B, A)
 
-t = quant_exist(e, a)
+t = quant_all(e, a)
 
 
 
