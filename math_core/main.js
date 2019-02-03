@@ -6,8 +6,8 @@ const negation = math_objects.negation;
 const tau = math_objects.tau;
 const implication = require("./abbreviations/implication");
 const quant_all = require("./abbreviations/quant_all");
-const is_implication = implication.is_implication;
-const implication_args = implication.implication_args;
+const is_implication = implication.is;
+const implication_args = implication.args;
 
 const C14 = require("./deductiv/C14");
 const C9 = require("./deductiv/C9");
@@ -25,6 +25,6 @@ t = quant_all(e, a)
 
 
 
-console.log(t)
+console.log(is_implication(e))
 
 T.close()

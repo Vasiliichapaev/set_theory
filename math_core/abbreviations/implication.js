@@ -9,11 +9,11 @@ exports = module.exports = (a, b) => {
   };
 
   
-exports.is_implication = sc => {
+exports.is = sc => {
   return sc.is_disjunction && sc.disjunction_args[0].is_negation;
 }
 
-exports.implication_args = sc => {
+exports.args = sc => {
   if (sc.hasOwnProperty("_implication_args")) return sc._implication_args;
   sc._implication_args = [sc.disjunction_args[0].negation_ratio, sc.disjunction_args[1]];
   return sc._implication_args;
