@@ -13,7 +13,7 @@ const C11 = require("./C11");
 // есть теорема.
 
 exports = module.exports = (A, B) => {
-    if (A.is_ratio, B.is_ratio){
+    if (A.is_ratio && B.is_ratio){
         let imp_A_B = implication(A, B);
         let imp_neB_neA = implication(negation(B), negation(A));
         let neneB = negation(negation(B));

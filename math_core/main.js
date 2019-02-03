@@ -8,7 +8,7 @@ const implication = require("./abbreviations/implication");
 const is_implication = implication.is_implication;
 const implication_args = implication.implication_args;
 
-const C12 = require("./deductiv/C12");
+const C13 = require("./deductiv/C13");
 
 let T = theory()
 
@@ -19,12 +19,15 @@ A = belong(a, b)
 B = belong(b, a)
 C = belong(a, a)
 
-w = C12(B, A)
+g = implication(A, B)
+g.axiom()
+
+w = C13(A, B, C)
 
 
 
 
-console.log(w.proof)
+console.log(w.verity)
 
 
 T.close()
