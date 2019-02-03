@@ -3,11 +3,15 @@ const disjunction = require("../math_objects").disjunction;
 const MathTheory = require("../math_objects").MathTheory;
 const implication = require("../abbreviations/implication");
 const implication_args = require("../abbreviations/implication").implication_args;
+const S1 = require("../schemes/S1");
+const S2 = require("../schemes/S2");
 const S3 = require("../schemes/S3");
 const S4 = require("../schemes/S4");
 const C1 = require("./C1");
 const C6 = require("./C6");
-const C12 = require("./C12");
+const C8 = require("./C8");
+const C9 = require("./C9");
+const C13 = require("./C13");
 
 // Метод вспомогательной гипотезы.
 // Пусть A соотношение теории T, а T' - теория получаемая присоединением A к
@@ -86,27 +90,27 @@ class AuxiliaryTheory extends MathTheory {
             }else{
                 this.proofer(B.proof[0]);
                 this.proofer(B.proof[1]);
-                Bj = this.pro_theory.copy(B.proof[0]);
-                Bj_imp_Bi = this.pro_theory.copy(B.proof[1]);
+                let Bj = this.pro_theory.copy(B.proof[0]);
+                let Bj_imp_Bi = this.pro_theory.copy(B.proof[1]);
                 C13(this.A, Bj, Bi);
-                C6(self.A, Bj_imp_Bi, AimpBi);
-                let neA = negation(self.A);
+                C6(this.A, Bj_imp_Bi, AimpBi);
+                let neA = negation(this.A);
                 let sc = S3(neA, AimpBi);
-                C1(...implication_args(sc))
-                S2(neA, Bi)
-                sc = S4(neA, AimpBi, AimpBi)
-                C1(...implication_args(sc))
-                sc = implication_args(sc)[1]
-                C1(...implication_args(sc))
-                sc = S1(AimpBi)
-                C1(...implication_args(sc))
+                C1(...implication_args(sc));
+                S2(neA, Bi);
+                sc = S4(neA, AimpBi, AimpBi);
+                C1(...implication_args(sc));
+                sc = implication_args(sc)[1];
+                C1(...implication_args(sc));
+                sc = S1(AimpBi);
+                C1(...implication_args(sc));
             }
         }
     }
 
     close(){
         if (this.new_B.verity){
-            this.proofer(self.new_B)
+            this.proofer(this.new_B);
         };
       }
 

@@ -9,7 +9,7 @@ const is_implication = implication.is_implication;
 const implication_args = implication.implication_args;
 
 const C14 = require("./deductiv/C14");
-const C11 = require("./deductiv/C11");
+const C9 = require("./deductiv/C9");
 
 const T = theory()
 
@@ -18,23 +18,19 @@ b = T.letter(a)
 
 A = belong(a, b)
 B = belong(b, a)
+e = implication(B, A)
+w = implication(A, e)
 
-t2 = C14(A, B)
+t2 = C14(A, e)
 
+a = t2.copy(A)
+b = t2.copy(B)
 
-a = t2.letter()
-b = t2.letter(a)
-
-A = belong(a, b)
-B = belong(b, a)
-C = belong(b, b)
-
-
-f = C11(A)
-
-console.log(f.verity)
+C9(b, a)
 
 
+t2.close()
 
+console.log(w.proof)
 
 T.close()
