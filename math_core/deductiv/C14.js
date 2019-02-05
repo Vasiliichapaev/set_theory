@@ -25,57 +25,29 @@ class AuxiliaryTheory extends MathTheory {
         this.A = A;
         this.B = B;
         this.new_A = this.copy(this.A);
+        this.new_A._proof = [this.new_A];
         this.new_B = this.copy(this.B);
         this.ratio = implication(A, B);
         this.new_ratio = this.copy(this.ratio);
-        this.theorems = [[this.new_A], [undefined], [undefined]];
-
+        this.theorems = new Dict();
+        this.theorems.add(this.new_A);
       }
 
     set_proof(ratio){
-        let in_theorems = false;
-        for (let i in this.theorems[0]){
-            if (this.theorems[0][i].eq(ratio)) {
-                in_theorems = true;
-                break;
-            };
-        };
-        if (!in_theorems){
-            this.theorems[0].push(ratio);
-            this.theorems[1].push(ratio._proof[0]);
-            this.theorems[2].push(ratio._proof[1]);
-        };
+        this.theorems.add(ratio);
     }
 
     get_proof(ratio){
-        let in_theorems = false;
-        let indx = -1;
-        for (let i in this.theorems[0]){
-            if (this.theorems[0][i].eq(ratio)) {
-                in_theorems = true;
-                indx = i;
-                break;
-            };
-        };
-
-        if (in_theorems){
-            if (this.theorems[1][indx] == undefined){
-                return ratio;
-            };
-            return [this.theorems[1][indx], this.theorems[2][indx], ratio];
+        if (this.theorems.has(ratio)){
+            return this.theorems.proof(ratio);
         };
         return this.pro_theory.get_proof(ratio);
     }
 
     get_verity(ratio){
-        let in_theorems = false;
-        for (let i in this.theorems[0]){
-            if (this.theorems[0][i].eq(ratio)) {
-                in_theorems = true;
-                break;
-            };
+        if (this.theorems.has(ratio)){
+            return true;
         };
-        if (in_theorems) return true;
         return this.pro_theory.get_verity(ratio);
     }
 
@@ -104,8 +76,8 @@ class AuxiliaryTheory extends MathTheory {
                 C1(...implication_args(sc));
                 sc = S1(AimpBi);
                 C1(...implication_args(sc));
-            }
-        }
+            };
+        };
     }
 
     close(){
@@ -117,6 +89,32 @@ class AuxiliaryTheory extends MathTheory {
 
 };
 
+class Dict {
+    constructor(){
+        this.names = {};
+    }
+
+    add(ratio){
+        if (!(ratio.name in this.names)){
+            this.names[ratio.name] = {};
+        };
+        this.names[ratio.name][ratio.id] = ratio._proof;
+    }
+
+    has(ratio){
+        if (ratio.name in this.names){
+            if (ratio.id in this.names[ratio.name]){
+                return true;
+            };
+        };
+        return false;
+    }
+
+    proof(ratio){
+        return this.names[ratio.name][ratio.id];
+    }
+
+};
 
 
 

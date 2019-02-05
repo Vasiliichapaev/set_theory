@@ -165,6 +165,7 @@ class Ratio extends SignCombination{
 
   axiom(){
     this._verity = true;
+    this._proof = [this];
     set_axiom(this)
   };
 

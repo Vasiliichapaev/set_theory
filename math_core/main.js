@@ -12,7 +12,6 @@ const implication_args = implication.args;
 const C14 = require("./deductiv/C14");
 const C9 = require("./deductiv/C9");
 
-const inclusion = require("./abbreviations/inclusion");
 
 const T = theory()
 
@@ -21,12 +20,18 @@ b = T.letter(a)
 
 A = belong(a, b)
 B = belong(b, a)
-e = implication(B, A)
 
-t = inclusion(a, b)
+w = implication(A, implication(B, A))
 
+t = C14(A, implication(B, A))
 
+a = t.copy(A)
+b = t.copy(B)
 
-console.log(t.use_letters)
+C9(b, a)
+
+t.close()
+
+console.log(w.verity)
 
 T.close()
