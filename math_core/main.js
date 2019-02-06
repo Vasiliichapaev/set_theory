@@ -9,9 +9,11 @@ const quant_all = require("./abbreviations/quant_all");
 const is_implication = implication.is;
 const implication_args = implication.args;
 
+const equivalence = require("./abbreviations/equivalence");
+
 const C14 = require("./deductiv/C14");
 const C9 = require("./deductiv/C9");
-
+const S7 = require("./schemes/S7");
 
 const T = theory()
 
@@ -21,17 +23,9 @@ b = T.letter(a)
 A = belong(a, b)
 B = belong(b, a)
 
-w = implication(A, implication(B, A))
+w = S7(A, B, a)
 
-t = C14(A, implication(B, A))
 
-a = t.copy(A)
-b = t.copy(B)
-
-C9(b, a)
-
-t.close()
-
-console.log(w.verity)
+console.log(w)
 
 T.close()
