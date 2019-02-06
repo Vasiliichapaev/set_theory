@@ -1,5 +1,5 @@
 const lite = require('better-sqlite3');
-const set = require("../libs/extended_set").set;
+const set = require("../libs/extended_set");
 
 exports.create_tables = () =>{
     const PATH = __dirname +'/database/database.sqlite3'

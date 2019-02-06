@@ -1,4 +1,4 @@
-const set = require("../libs/extended_set").set;
+const set = require("../libs/extended_set");
 const database_fanctions = require("./database_fanctions");
 const create_tables = database_fanctions.create_tables;
 const get_spec_id = database_fanctions.get_spec_id;

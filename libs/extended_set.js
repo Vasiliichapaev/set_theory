@@ -28,8 +28,8 @@ class ExtendedSet extends Set{
       return union_set;
     }
   };
-  
-exports.set = (arg) => {
+
+module.exports = (arg) => {
   if (arg === undefined) return new ExtendedSet();
 
   if (arg instanceof Array || arg instanceof Set || typeof arg == "string"){
