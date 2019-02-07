@@ -5,15 +5,12 @@ exports = module.exports = (a, b) => {
     return disjunction(negation(a), b);
 };
 
-exports.is = function(sc) {
+exports.is_implication = sc => {
     return sc.is_disjunction && sc.disjunction_args[0].is_negation;
 };
 
-exports.args = sc => {
+exports.implication_args = sc => {
     if (sc.hasOwnProperty("_implication_args")) return sc._implication_args;
-    sc._implication_args = [
-        sc.disjunction_args[0].negation_ratio,
-        sc.disjunction_args[1]
-    ];
+    sc._implication_args = [sc.disjunction_args[0].negation_ratio, sc.disjunction_args[1]];
     return sc._implication_args;
 };

@@ -1,14 +1,7 @@
-const {
-    theory,
-    belong,
-    disjunction,
-    negation,
-    tau
-} = require("./math_objects");
+const { theory, belong, disjunction, negation, tau } = require("./math_objects");
 const implication = require("./abbreviations/implication");
 const quant_all = require("./abbreviations/quant_all");
-const is_implication = implication.is;
-const implication_args = implication.args;
+const { is_implication, implication_args } = require("./abbreviations/implication");
 
 const equivalence = require("./abbreviations/equivalence");
 
@@ -26,7 +19,6 @@ B = belong(b, a);
 
 w = S7(A, B, a);
 
-console.log(is_implication(implication(a, b)));
-// console.log(w);
+console.log(is_implication(w));
 
 T.close();
