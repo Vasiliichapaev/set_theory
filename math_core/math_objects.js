@@ -1,16 +1,17 @@
 const set = require("../libs/extended_set");
-const database_functions = require("./database_functions");
-const create_tables = database_functions.create_tables;
-const get_spec_id = database_functions.get_spec_id;
-const get_disjunction_id = database_functions.get_disjunction_id;
-const get_negation_id = database_functions.get_negation_id;
-const get_tau_id = database_functions.get_tau_id;
-const get_verity = database_functions.get_verity;
-const set_axiom = database_functions.set_axiom;
-const set_proof = database_functions.set_proof;
-const get_proof = database_functions.get_proof;
-const get_use_letters = database_functions.get_use_letters;
-const get_args = database_functions.get_args;
+const {
+    create_tables,
+    get_spec_id,
+    get_disjunction_id,
+    get_negation_id,
+    get_tau_id,
+    get_verity,
+    set_axiom,
+    set_proof,
+    get_proof,
+    get_use_letters,
+    get_args
+} = require("./database_functions");
 
 // ===================== Математические объекты =====================
 class SignCombination {
@@ -392,32 +393,12 @@ class MathTheory {
 
 // ============= функции создания математических объектов ===========
 
-exports.theory = () => {
-    return new MathTheory();
-};
-
-exports.tau = (ratio, letter) => {
-    return new Tau(ratio, letter);
-};
-
-exports.negation = a => {
-    return new Negation(a);
-};
-
-exports.disjunction = (a, b) => {
-    return new Disjunction([a, b]);
-};
-
-exports.belong = (a, b) => {
-    return new Relation("belong", [a, b]);
-};
-
-exports.pair = (a, b) => {
-    return new Substantive("pair", [a, b]);
-};
-
-exports.equal = (a, b) => {
-    return new Relation("equal", [a, b]);
-};
+exports.theory = () => new MathTheory();
+exports.tau = (ratio, letter) => new Tau(ratio, letter);
+exports.negation = a => new Negation(a);
+exports.disjunction = (a, b) => new Disjunction([a, b]);
+exports.belong = (a, b) => new Relation("belong", [a, b]);
+exports.pair = (a, b) => new Substantive("pair", [a, b]);
+exports.equal = (a, b) => new Relation("equal", [a, b]);
 
 exports.MathTheory = MathTheory;

@@ -1,4 +1,4 @@
-const tau = require("../math_objects").tau;
+const { tau } = require("../math_objects");
 const database_functions = require("../database_functions");
 const get_quant = database_functions.get_quant;
 const set_quant = database_functions.set_quant;
