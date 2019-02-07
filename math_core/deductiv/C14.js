@@ -15,7 +15,7 @@ const C13 = require("./C13");
 // Пусть A соотношение теории T, а T' - теория получаемая присоединением A к
 // аксиомам теории T, Если B - теорема теории T', то 'A влечет B' есть теорема теории T.
 
-class AuxiliaryTheory extends MathTheory {
+class C14Theory extends MathTheory {
     constructor(A, B) {
         super(false);
         this.db = A.theory.db;
@@ -27,7 +27,7 @@ class AuxiliaryTheory extends MathTheory {
         this.new_B = this.copy(this.B);
         this.ratio = implication(A, B);
         this.new_ratio = this.copy(this.ratio);
-        this.theorems = new Dict();
+        this.theorems = new DictionaryOfTheorems();
         this.theorems.add(this.new_A);
     }
 
@@ -85,7 +85,7 @@ class AuxiliaryTheory extends MathTheory {
     }
 }
 
-class Dict {
+class DictionaryOfTheorems {
     constructor() {
         this.names = {};
     }
@@ -112,5 +112,8 @@ class Dict {
 }
 
 exports = module.exports = (A, B) => {
-    return new AuxiliaryTheory(A, B);
+    return new C14Theory(A, B);
 };
+
+module.exports.DictionaryOfTheorems = DictionaryOfTheorems;
+module.exports.C14Theory = C14Theory;
