@@ -17,8 +17,19 @@ b = T.letter(a);
 A = belong(a, b);
 B = belong(b, a);
 
-w = S7(A, B, a);
+w = implication(B, A);
 
-console.log(is_implication(w));
+q = implication(A, w);
+
+t = C14(A, w);
+
+a = t.copy(A);
+b = t.copy(B);
+
+C9(b, a);
+
+t.close();
+
+console.log(q.verity);
 
 T.close();
