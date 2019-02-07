@@ -1,4 +1,4 @@
-const { negation, disjunction, MathTheory } = require("../math_objects");
+const { negation, MathTheory } = require("../math_objects");
 const implication = require("../abbreviations/implication");
 const { implication_args } = require("../abbreviations/implication");
 const S1 = require("../schemes/S1");

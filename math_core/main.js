@@ -6,6 +6,7 @@ const { is_implication, implication_args } = require("./abbreviations/implicatio
 const equivalence = require("./abbreviations/equivalence");
 
 const C16 = require("./deductiv/C16");
+
 const C9 = require("./deductiv/C9");
 const S7 = require("./schemes/S7");
 
