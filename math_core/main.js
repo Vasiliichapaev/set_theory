@@ -21,7 +21,7 @@ a = T.letter()
 b = T.letter(a)
 
 A = belong(a, b)
-B = belong(b, a)
+B = belong(b, a) 
 
 w = S7(A, B, a)
 

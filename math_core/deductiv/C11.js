@@ -7,11 +7,11 @@ const C10 = require("./C10");
 // есть теорема . 
 
 exports = module.exports = (A) => {
-    if (A.is_ratio){
-        const ratio = implication(A, negation(negation(A))); 
-        if (!ratio.verity){
-            C10(negation(A));
-        }; 
-        return ratio;
-    };
+	if (A.is_ratio) {
+		const ratio = implication(A, negation(negation(A)));
+		if (!ratio.verity) {
+			C10(negation(A));
+		};
+		return ratio;
+	};
 };
