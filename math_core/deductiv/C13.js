@@ -1,6 +1,5 @@
 const { negation, disjunction } = require("../math_objects");
 const implication = require("../abbreviations/implication");
-const { implication_args } = require("../abbreviations/implication");
 const S3 = require("../schemes/S3");
 const S4 = require("../schemes/S4");
 const C1 = require("./C1");
@@ -22,9 +21,9 @@ exports = module.exports = (A, B, C) => {
             const ratio = implication(BimpC, AimpC);
             if (!ratio.verity) {
                 let sc = C12(A, B);
-                C1(...implication_args(sc));
+                C1(sc);
                 sc = S4(neB, neA, C);
-                C1(...implication_args(sc));
+                C1(sc);
                 S3(neB, C);
                 S3(C, neA);
                 C6(BimpC, disjunction(C, neB), disjunction(C, neA));

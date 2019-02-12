@@ -1,13 +1,17 @@
-const implication = require("../abbreviations/implication");
+const { is_implication, implication_args } = require("../abbreviations/implication");
 
-exports = module.exports = (A, B) => {
-	if (A.is_ratio && B.is_ratio) {
-		if (!B.verity) {
-			let C = implication(A, B);
-			if (A.verity && C.verity) {
-				B.proof = [A, C, B];
-			}
-		}
-		return B;
-	}
+// Если С соотношение вида: A => B
+// если A, С - теоремы,
+// тогда B есть теорема.
+
+exports = module.exports = C => {
+    if (is_implication(C)) {
+        let [A, B] = implication_args(C);
+        if (!B.verity) {
+            if (A.verity && C.verity) {
+                B.proof = [A, C, B];
+            }
+        }
+        return B;
+    }
 };

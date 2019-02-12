@@ -11,8 +11,8 @@ exports = module.exports = (A, B) => {
     if (A.is_ratio && B.is_ratio && B.verity) {
         const ratio = implication(A, B);
         if (!ratio.verity) {
-            C7(negation(A), B);
-            C1(B, ratio);
+            let sc = C7(negation(A), B);
+            C1(sc);
         }
         return ratio;
     }

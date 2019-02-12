@@ -21,14 +21,16 @@ class C14Theory extends MathTheory {
         this.db = A.theory.db;
         this.pro_theory = A.theory;
         this.A = A;
-        this.B = B;
         this.new_A = this.copy(this.A);
-        this.new_A._proof = [this.new_A];
-        this.new_B = this.copy(this.B);
-        this.ratio = implication(A, B);
-        this.new_ratio = this.copy(this.ratio);
         this.theorems = new DictionaryOfTheorems();
-        this.theorems.add(this.new_A);
+
+        if (B) {
+            this.new_B = this.copy(B);
+            this.ratio = implication(A, B);
+            this.new_ratio = this.copy(this.ratio);
+            this.new_A._proof = [this.new_A];
+            this.theorems.add(this.new_A);
+        }
     }
 
     set_proof(ratio) {
@@ -66,14 +68,13 @@ class C14Theory extends MathTheory {
                 C6(this.A, Bj_imp_Bi, AimpBi);
                 let neA = negation(this.A);
                 let sc = S3(neA, AimpBi);
-                C1(...implication_args(sc));
+                C1(sc);
                 S2(neA, Bi);
                 sc = S4(neA, AimpBi, AimpBi);
-                C1(...implication_args(sc));
-                sc = implication_args(sc)[1];
-                C1(...implication_args(sc));
+                sc = C1(sc);
+                C1(sc);
                 sc = S1(AimpBi);
-                C1(...implication_args(sc));
+                C1(sc);
             }
         }
     }
@@ -115,5 +116,4 @@ exports = module.exports = (A, B) => {
     return new C14Theory(A, B);
 };
 
-module.exports.DictionaryOfTheorems = DictionaryOfTheorems;
 module.exports.C14Theory = C14Theory;

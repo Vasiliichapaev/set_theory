@@ -20,10 +20,10 @@ exports = module.exports = A => {
             let sc = S4(neA, neneneA, A);
             C10(neneA);
             C10(A);
-            C1(...implication_args(sc));
-            C1(...implication_args(implication_args(sc)[1]));
+            sc = C1(sc);
+            C1(sc);
             sc = S3(A, neneneA);
-            C1(...implication_args(sc));
+            C1(sc);
         }
         return ratio;
     }

@@ -1,5 +1,4 @@
 const implication = require("../abbreviations/implication");
-const { implication_args } = require("../abbreviations/implication");
 const { negation } = require("../math_objects");
 const S4 = require("../schemes/S4");
 const C1 = require("./C1");
@@ -13,9 +12,8 @@ exports = module.exports = (A, B, C) => {
         if (!ratio.verity) {
             if (implication(A, B).verity && implication(B, C).verity) {
                 let sc = S4(B, C, negation(A));
-                let [q, w] = implication_args(sc);
-                C1(q, w);
-                C1(...implication_args(w));
+                sc = C1(sc);
+                C1(sc);
             }
         }
         return ratio;
