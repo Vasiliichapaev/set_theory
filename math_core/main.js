@@ -6,6 +6,7 @@ const { is_implication, implication_args } = require("./abbreviations/implicatio
 const equivalence = require("./abbreviations/equivalence");
 
 const C14 = require("./deductiv/C14");
+const C15 = require("./deductiv/C15");
 
 const C9 = require("./deductiv/C9");
 const S7 = require("./schemes/S7");
@@ -18,19 +19,19 @@ b = T.letter(a);
 A = belong(a, b);
 B = belong(b, a);
 
-w = implication(B, A);
+g = implication(negation(negation(A)), A);
 
-g = implication(A, w);
+t1 = C14(negation(negation(A)), A);
 
-t2 = C14(A, w);
+a = t1.copy(A);
 
-a = t2.copy(A);
-b = t2.copy(B);
+t2 = C15(a);
 
-f = C9(b, a);
-console.log(f.id);
+a2 = t2.copy(a);
 
-t2.close();
+t2.close(negation(a2));
+
+t1.close();
 
 console.log(g.verity);
 
