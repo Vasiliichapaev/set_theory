@@ -5,10 +5,10 @@ const { is_implication, implication_args } = require("./abbreviations/implicatio
 
 const equivalence = require("./abbreviations/equivalence");
 
-const C14 = require("./deductiv/C14");
+const C17 = require("./deductiv/C17");
 const C15 = require("./deductiv/C15");
 
-const C17 = require("./deductiv/C17");
+const C18 = require("./deductiv/C18");
 const S7 = require("./schemes/S7");
 
 const T = theory();
@@ -18,8 +18,13 @@ b = T.letter(a);
 
 A = belong(a, b);
 B = belong(b, a);
+C = belong(b, b);
 
-w = C17(A, B);
+disjunction(A, B).axiom();
+implication(A, C).axiom();
+implication(B, C).axiom();
+
+w = C18(A, B, C);
 
 console.log(w.verity);
 
