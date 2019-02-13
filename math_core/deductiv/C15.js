@@ -45,3 +45,20 @@ class C15Theory extends C14Theory {
 exports = module.exports = A => {
     return new C15Theory(A);
 };
+
+// тест
+// g = implication(negation(negation(A)), A);
+
+// t1 = C14(negation(negation(A)), A);
+
+// a = t1.copy(A);
+
+// t2 = C15(a);
+
+// a2 = t2.copy(a);
+
+// t2.close(negation(a2));
+
+// t1.close();
+
+// console.log(g.verity);

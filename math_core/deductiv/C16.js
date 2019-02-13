@@ -1,6 +1,5 @@
 const { negation } = require("../math_objects");
 const implication = require("../abbreviations/implication");
-const { implication_args } = require("../abbreviations/implication");
 const S3 = require("../schemes/S3");
 const S4 = require("../schemes/S4");
 const C1 = require("./C1");
