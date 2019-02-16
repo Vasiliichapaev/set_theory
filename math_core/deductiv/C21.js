@@ -1,10 +1,7 @@
 const { negation, disjunction } = require("../math_objects");
 const conjunction = require("../abbreviations/conjunction");
 const implication = require("../abbreviations/implication");
-const S1 = require("../schemes/S1");
 const S2 = require("../schemes/S2");
-const S3 = require("../schemes/S3");
-const S4 = require("../schemes/S4");
 const C1 = require("./C1");
 const C6 = require("./C6");
 const C7 = require("./C7");
@@ -12,9 +9,9 @@ const C11 = require("./C11");
 const C17 = require("./C17");
 
 // Если A, B - соотношения, то
-// (A и B) влечёт A
+// (A и B) => A
 // 		и
-// (A и B) влечёт B
+// (A и B) => B
 // суть теоремы .
 
 exports = module.exports = (A, B) => {
