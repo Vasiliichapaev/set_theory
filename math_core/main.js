@@ -8,7 +8,7 @@ const equivalence = require("./abbreviations/equivalence");
 const C17 = require("./deductiv/C17");
 const C15 = require("./deductiv/C15");
 
-const C20 = require("./deductiv/C20");
+const C21 = require("./deductiv/C21");
 const S7 = require("./schemes/S7");
 
 const T = theory();
@@ -20,11 +20,8 @@ A = belong(a, b);
 B = belong(b, a);
 C = belong(b, b);
 
-A.axiom();
-B.axiom();
+[w, e] = C21(A, B);
 
-w = C20(A, B);
-
-console.log(w.verity);
+console.log(w.verity, e.verity);
 
 T.close();
