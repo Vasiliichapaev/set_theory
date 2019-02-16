@@ -9,21 +9,24 @@ const { is_conjunction, conjunction_args } = require("./abbreviations/conjunctio
 const C17 = require("./deductiv/C17");
 const C15 = require("./deductiv/C15");
 
-const C26 = require("./deductiv/C26");
+const C30 = require("./deductiv/C30");
 
 const CM7 = require("./deductiv/CM7");
 const S7 = require("./schemes/S7");
+
+const A2 = require("./axioms/A2");
 
 const T = theory();
 
 a = T.letter();
 b = T.letter(a);
+c = T.letter(a, b);
 
 A = belong(a, b);
 B = belong(b, a);
 C = belong(b, b);
 
-w = C26(A, a);
+w = A2(a, b, c);
 
 console.log(w.verity);
 
