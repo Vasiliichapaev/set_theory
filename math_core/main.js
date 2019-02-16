@@ -9,7 +9,7 @@ const { is_conjunction, conjunction_args } = require("./abbreviations/conjunctio
 const C17 = require("./deductiv/C17");
 const C15 = require("./deductiv/C15");
 
-const { C24_1 } = require("./deductiv/C24");
+const C24_1 = require("./deductiv/C24_1");
 
 const CM7 = require("./deductiv/CM7");
 const S7 = require("./schemes/S7");

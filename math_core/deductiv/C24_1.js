@@ -8,7 +8,7 @@ const C20 = require("./C20");
 // (не не A) эвивалентно A
 // - теорема.
 
-exports.C24_1 = A => {
+exports = module.exports = A => {
     if (A.is_ratio) {
         let ratio = equivalence(negation(negation(A)), A);
         if (!ratio.verity) {
