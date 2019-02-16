@@ -18,7 +18,7 @@ exports.is_conjunction = sc => {
 };
 
 exports.conjunction_args = sc => {
-    // if (sc.hasOwnProperty("_conjunction_args")) return sc._conjunction_args;
+    if (sc.hasOwnProperty("_conjunction_args")) return sc._conjunction_args;
     sc._conjunction_args = [
         sc.negation_ratio.disjunction_args[0].negation_ratio,
         sc.negation_ratio.disjunction_args[1].negation_ratio
