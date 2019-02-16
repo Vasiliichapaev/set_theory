@@ -9,6 +9,8 @@ const { is_conjunction, conjunction_args } = require("./abbreviations/conjunctio
 const C17 = require("./deductiv/C17");
 const C15 = require("./deductiv/C15");
 
+const { C24_1 } = require("./deductiv/C24");
+
 const CM7 = require("./deductiv/CM7");
 const S7 = require("./schemes/S7");
 
@@ -21,12 +23,8 @@ A = belong(a, b);
 B = belong(b, a);
 C = belong(b, b);
 
-w = conjunction(A, B);
+w = C24_1(A);
 
-w.axiom();
-
-CM7(w);
-
-console.log(A.verity, B.verity);
+console.log(w.verity);
 
 T.close();
