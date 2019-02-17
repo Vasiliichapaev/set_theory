@@ -6,7 +6,7 @@ const { is_implication, implication_args } = require("./abbreviations/implicatio
 const conjunction = require("./abbreviations/conjunction");
 const { is_conjunction, conjunction_args } = require("./abbreviations/conjunction");
 
-const two_elements_set = require("./abbreviations/two_elements_set");
+const one_element_set = require("./abbreviations/one_element_set");
 
 const C17 = require("./deductiv/C17");
 const C15 = require("./deductiv/C15");
@@ -28,7 +28,7 @@ A = belong(a, b);
 B = belong(b, a);
 C = belong(b, b);
 
-w = two_elements_set(a, b);
+w = one_element_set(a);
 
 console.log(w);
 
