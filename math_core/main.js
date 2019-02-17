@@ -16,19 +16,20 @@ const C30 = require("./deductiv/C30");
 const CM7 = require("./deductiv/CM7");
 const S7 = require("./schemes/S7");
 
-const A2 = require("./axioms/A2");
+const A3 = require("./axioms/A3");
 
 const T = theory();
 
 a = T.letter();
 b = T.letter(a);
 c = T.letter(a, b);
+d = T.letter(a, b, c);
 
 A = belong(a, b);
 B = belong(b, a);
 C = belong(b, b);
 
-w = one_element_set(a);
+w = A3(a, b, c, d);
 
 console.log(w);
 
