@@ -20,8 +20,7 @@ const A3 = require("./axioms/A3");
 
 const T = theory();
 
-const axioms = require("./axioms");
-axioms();
+require("./axioms")();
 
 // a = T.letter();
 // b = T.letter(a);
