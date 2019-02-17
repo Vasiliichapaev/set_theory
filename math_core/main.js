@@ -20,17 +20,20 @@ const A3 = require("./axioms/A3");
 
 const T = theory();
 
-a = T.letter();
-b = T.letter(a);
-c = T.letter(a, b);
-d = T.letter(a, b, c);
+const axioms = require("./axioms");
+axioms();
 
-A = belong(a, b);
-B = belong(b, a);
-C = belong(b, b);
+// a = T.letter();
+// b = T.letter(a);
+// c = T.letter(a, b);
+// d = T.letter(a, b, c);
 
-w = A3(a, b, c, d);
+// A = belong(a, b);
+// B = belong(b, a);
+// C = belong(b, b);
 
-console.log(w);
+// w = A3(a, b, c, d);
 
-T.close();
+// console.log(w);
+
+// T.close();
