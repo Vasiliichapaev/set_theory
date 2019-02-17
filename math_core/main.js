@@ -6,6 +6,8 @@ const { is_implication, implication_args } = require("./abbreviations/implicatio
 const conjunction = require("./abbreviations/conjunction");
 const { is_conjunction, conjunction_args } = require("./abbreviations/conjunction");
 
+const epsilon = require("./abbreviations/epsilon");
+
 const C17 = require("./deductiv/C17");
 const C15 = require("./deductiv/C15");
 
@@ -26,8 +28,8 @@ A = belong(a, b);
 B = belong(b, a);
 C = belong(b, b);
 
-w = A2(a, b, c);
+w = epsilon(A, b);
 
-console.log(w.verity);
+console.log(w);
 
 T.close();
