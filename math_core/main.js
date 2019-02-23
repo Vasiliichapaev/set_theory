@@ -5,7 +5,8 @@ const { is_implication, implication_args } = require("./abbreviations/implicatio
 
 const { is_conjunction, conjunction_args } = require("./abbreviations/conjunction");
 
-const one_element_set = require("./abbreviations/one_element_set");
+const complement = require("./abbreviations/complement");
+const inclusion = require("./abbreviations/inclusion");
 
 const C8 = require("./deductiv/C8");
 const C27 = require("./deductiv/C27");
@@ -29,7 +30,10 @@ A = belong(a, b);
 B = belong(b, a);
 C = belong(b, b);
 
-w = exist_one(A, a);
+f = inclusion(a, b);
+f.axiom();
+
+w = complement(a, b);
 
 console.log(w);
 
