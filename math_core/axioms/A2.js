@@ -5,8 +5,7 @@ const { theory } = require("../math_objects");
 
 // Аксиома двухэлементного множества
 
-exports = module.exports = () => {
-    let t = theory();
+exports = module.exports = t => {
     let x = t.letter();
     let y = t.letter(x);
     let z = t.letter(x, y);
@@ -15,5 +14,5 @@ exports = module.exports = () => {
     sc2 = quant_all(sc1, y);
     ax = quant_all(sc2, x);
     ax.axiom();
-    t.close();
+    return ax;
 };

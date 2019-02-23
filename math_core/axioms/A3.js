@@ -6,8 +6,7 @@ const { theory } = require("../math_objects");
 
 // Аксиома пары
 
-exports = module.exports = () => {
-    let t = theory();
+exports = module.exports = t => {
     let x = t.letter();
     let y = t.letter(x);
     let a = t.letter(x, y);
@@ -18,5 +17,5 @@ exports = module.exports = () => {
     sc = quant_all(sc, a);
     sc = quant_all(sc, x);
     sc.axiom();
-    t.close();
+    return ax;
 };
