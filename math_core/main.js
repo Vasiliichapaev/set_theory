@@ -14,7 +14,7 @@ const C3 = require("./deductiv/C3");
 
 const CM7 = require("./deductiv/CM7");
 const S7 = require("./schemes/S7");
-const T1_1 = require("./theorems/T1_1");
+const exist_one = require("./abbreviations/exist_one");
 
 const { A1, A2, A3 } = require("./axioms");
 
@@ -29,8 +29,8 @@ A = belong(a, b);
 B = belong(b, a);
 C = belong(b, b);
 
-w = T1_1(T);
+w = exist_one(A, a);
 
-console.log(w.verity);
+console.log(w);
 
 T.close();
