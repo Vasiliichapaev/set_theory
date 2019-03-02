@@ -1,8 +1,4 @@
-const { equal, pair } = require("../math_objects");
-const implication = require("../abbreviations/implication");
-const conjunction = require("../abbreviations/conjunction");
-const quant_all = require("../abbreviations/quant_all");
-const { theory } = require("../math_objects");
+const { equal, pair, implication, conjunction, quant_all } = require("../abbreviations");
 
 // Аксиома пары
 

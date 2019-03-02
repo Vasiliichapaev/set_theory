@@ -1,7 +1,7 @@
 const { disjunction } = require("../math_objects");
-const implication = require("../abbreviations/implication");
-const S2 = require("../schemes/S2");
-const S3 = require("../schemes/S3");
+const { implication } = require("../abbreviations");
+const { S2, S3 } = require("../schemes");
+
 const C6 = require("./C6");
 
 // Если A и B - соотношения , то

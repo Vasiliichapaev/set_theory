@@ -1,4 +1,4 @@
-const { equal } = require("../math_objects");
+const equal = require("./equal");
 const implication = require("./implication");
 const conjunction = require("./conjunction");
 const quant_all = require("./quant_all");

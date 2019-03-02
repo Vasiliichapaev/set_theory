@@ -1,7 +1,4 @@
-const { equal, disjunction } = require("../math_objects");
-const coll = require("../abbreviations/coll");
-const quant_all = require("../abbreviations/quant_all");
-const { theory } = require("../math_objects");
+const { equal, disjunction, coll, quant_all } = require("../abbreviations");
 
 // Аксиома двухэлементного множества
 

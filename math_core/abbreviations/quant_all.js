@@ -1,4 +1,4 @@
-const { negation } = require("../math_objects");
+const negation = require("./negation");
 const quant_exist = require("./quant_exist");
 
 exports = module.exports = (ratio, letter) => {

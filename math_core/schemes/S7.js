@@ -1,7 +1,4 @@
-const { equal, tau } = require("../math_objects");
-const implication = require("../abbreviations/implication");
-const equivalence = require("../abbreviations/equivalence");
-const quant_all = require("../abbreviations/quant_all");
+const { equal, tau, implication, equivalence, quant_all } = require("../abbreviations");
 
 // Если R и S  соотношения а, x -буква.
 // тогда соотношение
@@ -10,10 +7,7 @@ const quant_all = require("../abbreviations/quant_all");
 
 module.exports = (R, S, x) => {
     if (R.is_ratio && S.is_ratio && x.is_letter) {
-        let ratio = implication(
-            quant_all(equivalence(R, S), x),
-            equal(tau(R, x), tau(S, x))
-        );
+        let ratio = implication(quant_all(equivalence(R, S), x), equal(tau(R, x), tau(S, x)));
         ratio.axiom();
         return ratio;
     }

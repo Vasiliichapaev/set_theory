@@ -1,7 +1,11 @@
-const { equal, tau } = require("../math_objects");
-const implication = require("../abbreviations/implication");
-const equivalence = require("../abbreviations/equivalence");
-const quant_all = require("../abbreviations/quant_all");
+const {
+    implication,
+    quant_all,
+    quant_exist,
+    belong,
+    сoll,
+    conjunction
+} = require("../abbreviations");
 
 // Пусть R - сотношение x, y -различные буквы, X, Y - буквы отличные от x и y
 // и не встречающиеся в R, Тогда

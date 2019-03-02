@@ -1,9 +1,4 @@
-const { equal } = require("../math_objects");
-const conjunction = require("../abbreviations/conjunction");
-const implication = require("../abbreviations/implication");
-const inclusion = require("../abbreviations/inclusion");
-const quant_all = require("../abbreviations/quant_all");
-const { theory } = require("../math_objects");
+const { equal, conjunction, implication, inclusion, quant_all } = require("../abbreviations");
 
 // Аксиома экстенсиональности
 

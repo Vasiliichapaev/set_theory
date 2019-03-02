@@ -1,6 +1,7 @@
+const tau = require("./tau");
+const belong = require("./belong");
 const equivalence = require("./equivalence");
 const quant_all = require("./quant_all");
-const { tau, belong } = require("../math_objects");
 
 // Множество всех x таких что R
 

@@ -1,5 +1,6 @@
 const { negation } = require("../math_objects");
-const implication = require("../abbreviations/implication");
+const { implication } = require("../abbreviations");
+
 const C10 = require("./C10");
 
 // Если A - соотношение , то

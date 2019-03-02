@@ -1,4 +1,5 @@
-const { negation, belong } = require("../math_objects");
+const negation = require("./negation");
+const belong = require("./belong");
 const conjunction = require("./conjunction");
 const inclusion = require("./inclusion");
 const epsilon = require("./epsilon");

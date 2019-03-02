@@ -1,7 +1,5 @@
-const { tau } = require("../math_objects");
-const database_functions = require("../database_functions");
-const get_quant = database_functions.get_quant;
-const set_quant = database_functions.set_quant;
+const tau = require("./tau");
+const { get_quant, set_quant } = require("../database_functions");
 
 exports = module.exports = (ratio, letter) => {
     let t = tau(ratio, letter);

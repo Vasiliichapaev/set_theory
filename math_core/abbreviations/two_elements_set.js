@@ -1,4 +1,5 @@
-const { disjunction, equal } = require("../math_objects");
+const disjunction = require("./disjunction");
+const equal = require("./equal");
 const epsilon = require("./epsilon");
 
 // Двухэлементное множество

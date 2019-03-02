@@ -1,6 +1,7 @@
-const implication = require("../abbreviations/implication");
+const { implication } = require("../abbreviations");
 const { negation } = require("../math_objects");
-const S4 = require("../schemes/S4");
+const { S4 } = require("../schemes");
+
 const C1 = require("./C1");
 
 // Пусть A, B, C - соотношения. Если 'A влечет B' и

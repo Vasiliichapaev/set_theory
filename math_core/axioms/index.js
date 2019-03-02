@@ -1,5 +1,3 @@
-const A1 = require("./A1");
-const A2 = require("./A2");
-const A3 = require("./A3");
-
-module.exports = { A1, A2, A3 };
+exports.A1 = require("./A1");
+exports.A2 = require("./A2");
+exports.A3 = require("./A3");

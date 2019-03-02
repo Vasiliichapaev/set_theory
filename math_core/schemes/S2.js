@@ -1,5 +1,4 @@
-const implication = require("../abbreviations/implication");
-const { disjunction } = require("../math_objects");
+const { disjunction, implication } = require("../abbreviations");
 
 // Если A и B - соотношения, то соотношение
 // A влечёт (A или B)

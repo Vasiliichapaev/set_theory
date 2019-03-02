@@ -1,5 +1,5 @@
-const { equal, negation } = require("../math_objects");
-const S7 = require("../schemes/S7");
+const { equal, negation } = require("../abbreviations");
+const { S7 } = require("../schemes");
 const C1 = require("../deductiv/C1");
 const C8 = require("../deductiv/C8");
 const C20 = require("../deductiv/C20");

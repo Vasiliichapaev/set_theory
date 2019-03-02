@@ -1,5 +1,6 @@
 const { negation, disjunction } = require("../math_objects");
-const S3 = require("../schemes/S3");
+const { S3 } = require("../schemes");
+
 const C1 = require("./C1");
 const C8 = require("./C8");
 

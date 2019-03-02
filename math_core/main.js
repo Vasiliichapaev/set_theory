@@ -1,40 +1,41 @@
-const { theory, belong, disjunction, negation, tau } = require("./math_objects");
-const implication = require("./abbreviations/implication");
-const quant_all = require("./abbreviations/quant_all");
-const { is_implication, implication_args } = require("./abbreviations/implication");
+const { theory } = require("./abbreviations");
 
-const { is_conjunction, conjunction_args } = require("./abbreviations/conjunction");
+console.log(theory);
+// const implication = require("./abbreviations/implication");
+// const quant_all = require("./abbreviations/quant_all");
+// const { is_implication, implication_args } = require("./abbreviations/implication");
 
-const complement = require("./abbreviations/complement");
-const inclusion = require("./abbreviations/inclusion");
+// const { is_conjunction, conjunction_args } = require("./abbreviations/conjunction");
 
-const C8 = require("./deductiv/C8");
-const C27 = require("./deductiv/C27");
+// const { complement, inclusion } = require("./abbreviations");
+// const g = require("./abbreviations");
 
-const C3 = require("./deductiv/C3");
+// const C8 = require("./deductiv/C8");
+// const C27 = require("./deductiv/C27");
 
-const CM7 = require("./deductiv/CM7");
-const S7 = require("./schemes/S7");
-const exist_one = require("./abbreviations/exist_one");
+// const C3 = require("./deductiv/C3");
 
-const { A1, A2, A3 } = require("./axioms");
+// const CM7 = require("./deductiv/CM7");
+// const S7 = require("./schemes/S7");
 
-const T = theory();
+// const { A1, A2, A3 } = require("./axioms");
 
-a = T.letter();
-b = T.letter(a);
-c = T.letter(a, b);
-d = T.letter(a, b, c);
+// const T = theory();
 
-A = belong(a, b);
-B = belong(b, a);
-C = belong(b, b);
+// a = T.letter();
+// b = T.letter(a);
+// c = T.letter(a, b);
+// d = T.letter(a, b, c);
 
-f = inclusion(a, b);
-f.axiom();
+// A = belong(a, b);
+// B = belong(b, a);
+// C = belong(b, b);
 
-w = complement(a, b);
+// f = inclusion(a, b);
+// f.axiom();
 
-console.log(w);
+// w = complement(a, b);
 
-T.close();
+// console.log(w);
+
+// T.close();

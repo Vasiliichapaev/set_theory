@@ -1,4 +1,5 @@
-const { negation, disjunction } = require("../math_objects");
+const negation = require("./negation");
+const disjunction = require("./disjunction");
 
 exports = module.exports = (x, y) => {
     let sc = negation(disjunction(negation(x), negation(y)));

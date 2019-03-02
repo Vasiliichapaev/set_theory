@@ -1,4 +1,5 @@
-const { disjunction, negation } = require("../math_objects");
+const disjunction = require("./disjunction");
+const negation = require("./negation");
 
 exports = module.exports = (a, b) => {
     this._implication_args = [a, b];

@@ -391,14 +391,9 @@ class MathTheory {
     }
 }
 
-// ============= функции создания математических объектов ===========
-
-exports.theory = () => new MathTheory();
-exports.tau = (ratio, letter) => new Tau(ratio, letter);
-exports.negation = a => new Negation(a);
-exports.disjunction = (a, b) => new Disjunction([a, b]);
-exports.belong = (a, b) => new Relation("belong", [a, b]);
-exports.pair = (a, b) => new Substantive("pair", [a, b]);
-exports.equal = (a, b) => new Relation("equal", [a, b]);
-
 exports.MathTheory = MathTheory;
+exports.Tau = Tau;
+exports.Negation = Negation;
+exports.Disjunction = Disjunction;
+exports.Relation = Relation;
+exports.Substantive = Substantive;
