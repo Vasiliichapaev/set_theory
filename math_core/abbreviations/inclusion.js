@@ -1,4 +1,4 @@
-const belong = require("./math_objects");
+const belong = require("./belong");
 const implication = require("./implication");
 const quant_all = require("./quant_all");
 

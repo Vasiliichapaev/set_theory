@@ -1,3 +1,3 @@
 const { Tau } = require("../math_objects");
 
-exports.tau = (ratio, letter) => new Tau(ratio, letter);
+exports = module.exports = tau = (ratio, letter) => new Tau(ratio, letter);
