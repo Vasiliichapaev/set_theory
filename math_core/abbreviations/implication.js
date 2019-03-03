@@ -2,8 +2,9 @@ const disjunction = require("./disjunction");
 const negation = require("./negation");
 
 exports = module.exports = (a, b) => {
-    this._implication_args = [a, b];
-    return disjunction(negation(a), b);
+    let ratio = disjunction(negation(a), b);
+    ratio._implication_args = [a, b];
+    return ratio;
 };
 
 exports.is_implication = sc => {

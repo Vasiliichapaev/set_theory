@@ -1,7 +1,6 @@
-const { negation, tau } = require("../math_objects");
-const implication = require("../abbreviations/implication");
-const quant_all = require("../abbreviations/quant_all");
-const S5 = require("../schemes/S5");
+const { implication, quant_all, negation, tau } = require("../abbreviations");
+const { S5 } = require("../schemes");
+
 const C1 = require("./C1");
 const C6 = require("./C6");
 const C17 = require("./C17");

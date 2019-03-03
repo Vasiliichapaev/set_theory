@@ -1,5 +1,4 @@
-const { disjunction } = require("../math_objects");
-const { implication } = require("../abbreviations");
+const { implication, disjunction } = require("../abbreviations");
 const { S2, S3 } = require("../schemes");
 
 const C6 = require("./C6");

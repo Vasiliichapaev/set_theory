@@ -1,5 +1,7 @@
 const { theory, belong, inclusion, complement } = require("./abbreviations");
 
+const { C8 } = require("./deductiv");
+
 const T = theory();
 
 a = T.letter();
@@ -8,14 +10,9 @@ c = T.letter(a, b);
 d = T.letter(a, b, c);
 
 A = belong(a, b);
-B = belong(b, a);
-C = belong(b, b);
 
-f = inclusion(a, b);
-f.axiom();
+w = C8(A);
 
-w = complement(a, b);
-
-console.log(f);
+console.log(w);
 
 T.close();

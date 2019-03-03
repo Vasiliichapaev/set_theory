@@ -1,4 +1,5 @@
-const { is_implication, implication_args } = require("../abbreviations/implication");
+const { implication } = require("../abbreviations");
+const { is_implication, implication_args } = implication;
 
 // Если С соотношение вида: A => B
 // если A, С - теоремы,

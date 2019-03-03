@@ -1,4 +1,6 @@
-const { is_conjunction, conjunction_args } = require("../abbreviations/conjunction");
+const conjunction = require("../abbreviations");
+const { is_conjunction, conjunction_args } = conjunction;
+
 const C1 = require("./C1");
 const C21 = require("./C21");
 

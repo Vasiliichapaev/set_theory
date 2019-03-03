@@ -1,5 +1,5 @@
-const { negation, tau } = require("../math_objects");
-const quant_all = require("../abbreviations/quant_all");
+const { quant_all, negation, tau } = require("../abbreviations");
+
 const CM8 = require("./CM8");
 const C26 = require("./C26");
 

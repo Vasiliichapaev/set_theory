@@ -1,5 +1,7 @@
-const { conjunction_args } = require("../abbreviations/conjunction");
-const { equivalence_args } = require("../abbreviations/equivalence");
+const { conjunction, equivalence } = require("../abbreviations");
+const { conjunction_args } = conjunction;
+const { equivalence_args } = equivalence;
+
 const C1 = require("./C1");
 const CM7 = require("./CM7");
 

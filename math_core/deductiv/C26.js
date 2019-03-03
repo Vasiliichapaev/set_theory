@@ -1,6 +1,5 @@
-const { negation, tau } = require("../math_objects");
-const equivalence = require("../abbreviations/equivalence");
-const quant_all = require("../abbreviations/quant_all");
+const { equivalence, negation, tau, quant_all } = require("../abbreviations");
+
 const C24_1 = require("./C24_1");
 
 // Пусть R - соотношение, x - буква, тогда
