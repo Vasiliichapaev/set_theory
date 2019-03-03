@@ -1,4 +1,4 @@
-exports.belong = require("./coll");
+exports.belong = require("./belong");
 exports.disjunction = require("./disjunction");
 exports.equal = require("./equal");
 exports.negation = require("./negation");

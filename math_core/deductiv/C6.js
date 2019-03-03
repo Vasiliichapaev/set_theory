@@ -8,7 +8,7 @@ const C1 = require("./C1");
 
 exports = module.exports = (A, B, C) => {
     if (A.is_ratio && B.is_ratio && C.is_ratio) {
-        const ratio = implication(A, C);
+        let ratio = implication(A, C);
         if (!ratio.verity) {
             if (implication(A, B).verity && implication(B, C).verity) {
                 let sc = S4(B, C, negation(A));

@@ -1,4 +1,4 @@
-const { theory, belong, inclusion, complement } = require("./abbreviations");
+const { theory, belong } = require("./abbreviations");
 
 const { C8 } = require("./deductiv");
 
